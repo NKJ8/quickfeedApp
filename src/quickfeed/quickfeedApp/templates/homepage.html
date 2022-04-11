@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>QUICKFEED APP</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #333333;
+ }
+
+.header {
+ float: center;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+  font-size:x-large;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.h-right{
+float: right;
+}
+
+
+.h-left{
+float: left;
+}
+
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: center;
+  width: 30%;
+  background: #ccc;
+ 
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 80%;
+  background-color: #f1f1f1;
+  height: 500px; 
+  margin: 25px;
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+  margin: 15px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #333333;
+  padding: 10px;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.search-bar
+{
+  float: center;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 18px; 
+  line-height: 25px;
+  border-radius: 4px;
+
+
+}
+
+.side-box {
+  width: 12%;
+  height: 185px;
+  padding-left: 15px;
+  margin: 25px;
+  float: right;
+  font-style: italic;
+  background-color: #697B84;
+
+}
+
+
+.grid-container {
+  display: grid;
+  height: 500px;
+  grid-template-columns: auto auto auto auto;
+  background-color: #ffffff;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+
+  .checked {
+  color: blue;
+}
+
+
+
+.side-1 {float: left;}
+.side-1 section {width: 50%; float: left;}
+
+
+</style>
+</head>
+<body>
+
+<header>
+ 
+  <div class="header" >
+   			QUICKFEED
+            <div class="h-left">
+            Welcome the the QuickFeed Website!!!
+            </div>
+            <div class="h-right">
+				<button style ="padding: 5px 20px;font-size: larger;" >Login</button>
+   			 	<button style ="padding: 5px 20px;font-size: larger;" >Sign-up</button>
+    		</div>
+    <nav>
+    <ul>
+      <li><a href="#">Discover</a></li>
+      <li><a href="#">Top Reviews</a></li>
+      <li><a href="#">Search</a></li>
+    </ul>
+  </nav>
+</div>
+
+</header>
+
+
+   
+<div>
+<section style="height: 800px "> 
+  
+  <article style="height: 700px ">
+   
+    <p><h3>Discover....</h3></p>
+    <div class="grid-container">
+      <div class="grid-item">
+        {% load static %} <img src="{% static "quickfeed/images/Resturant.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Resturants</a>
+
+      </div>
+      <div class="grid-item">
+
+        {% load static %} <img src="{% static "quickfeed/images/hotels.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Hotels</a>
+      </div>
+      <div class="grid-item">
+
+        {% load static %} <img src="{% static "quickfeed/images/lcok.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Locksmith</a>
+      </div>  
+      <div class="grid-item">
+
+        {% load static %} <img src="{% static "quickfeed/images/dryclean.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Laundry</a>
+      </div>
+      <div class="grid-item">
+
+        {% load static %} <img src="{% static "quickfeed/images/meuseums.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Meuseums</a>
+      </div>
+      <div class="grid-item">
+
+        {% load static %} <img src="{% static "quickfeed/images/bars.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Bars</a>
+      </div>  
+      <div class="grid-item">
+
+        {% load static %} <img src="{% static "quickfeed/images/Bakery.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Bakery</a>
+      </div>
+      <div class="grid-item">
+
+        {% load static %} <img src="{% static "quickfeed/images/cafe.PNG" %}" alt="home"/>
+        <br>
+          <a href="" style="float: center;">Cafe</a>
+      </div>
+      
+      </div>
+  </article>
+
+  <aside class="side-box">
+    <form action="">
+        <br>
+        <label for="fname" style="padding-right: 10px;">Username:</label>
+        <input type="text" id="user" name="user" value="user1" "><br>
+        <br>
+        <label for="lname" style="padding-right: 15px;">Password:</label>
+        <input type="text" id="pass" name="pass" value="********"><br><br>
+        <input type="login" value="Login" size ="5" style="padding-left: 25px;margin-left: 98px;font-weight: bold;">
+      </form> 
+      <p> <a href="#">Forgot Password?</a> <br>
+              New User? <a href="#">Sign-Up!</a>
+    </p>
+    </aside>
+
+    <aside class="side-box" style="height: 100px;">
+        <p  style="padding-left: 25px; float:right; margin-right: 10px;"> For Business. Register Here.</p>
+
+  <form action="">
+  
+    <input type="Register" value="Register" size ="8" style="padding-left: 25px; float:right; margin-right: 10px; font-weight: bold;">
+  </form> 
+
+
+        </aside>
+</section>
+
+
+    
+</div>
+<form action="" class="search-bar" >
+    <input type="text" placeholder="Find Resturants, services, users.." name="search" size="150" style="height: 60px;">
+    <button type="submit" size="30" style="height: 50px; background-color: rgb(209, 190, 190); font-size: larger; font-weight: bold;">Find Business & Users</button>
+  </form>
+
+
+ 
+<section class="bottom-part" style = "width: 95%; height: 650px;">  
+
+  <article style = "width: 100%; padding: 12px; height: 600px">
+    <h1>Top Reviews Near You!</h1>
+    <div class="grid-container">
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/food2.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">Nitesh,2022</a>
+                  <br>
+            <span class="fa fa-star checked" "></span>
+            <span class="fa fa-star checked" "></span>
+            <span class="fa fa-star checked" "></span>
+            <span class="fa fa-star"  "></span>
+            <span class="fa fa-star"  "></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/food_2.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">Taylor,2022</a>
+                  <br>
+            <span class="fa fa-star checked" ></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/food_3.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">Josh,2022</a>
+                  <br>
+            <span class="fa fa-star checked" ></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/food_4.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">Harry,2022</a>
+                  <br>
+            <span class="fa fa-star checked" ></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/food_5.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">Sam,2022</a>
+                  <br>
+            <span class="fa fa-star checked" ></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/shops.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">Pat,2022</a>
+                  <br>
+            <span class="fa fa-star checked" ></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/food_5.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">Smith,2022</a>
+                  <br>
+            <span class="fa fa-star checked" ></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+      <div class="grid-item">
+        <section class="side-1">
+                <section>
+                {% load static %} <img src="{% static "quickfeed/images/food_3.PNG" %}" alt="home" width="100" height="100"/>  
+            </section>
+              <section ">
+
+            <a href="" style="font-size: medium;">John,2022</a>
+                  <br>
+            <span class="fa fa-star checked" ></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+
+              </section>
+       </section>
+                
+
+      </div>
+        </div>
+        
+  </article>
+</section>
+
+<footer>
+  <p> Copyright © 2022</p>
+</footer>
+
+</body>
+</html>
+
