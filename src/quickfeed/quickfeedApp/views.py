@@ -5,7 +5,4 @@ from django.http import HttpResponse
 # Action
 
 def homepage(request):
-        # return HttpResponse('Hello');
-       # return render(request,'hello.html',{'name': 'Nitesh'})
-        # return render(request,'hello.html',{'name': 'Nitesh'})
-        return render(request,'homepage.html',{'name': 'Nitesh'})
+        return render(request, 'index.html', {'title': 'Welcome to quickfeed'})
