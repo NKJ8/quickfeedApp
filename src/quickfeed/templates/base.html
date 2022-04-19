@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{% url "homepage" %}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About Us</a>
@@ -59,8 +59,8 @@
                         </li> {% endcomment %}
                     </ul>
                     <form class="d-flex justify-content-around">
-                        <button class="btn btn-outline-success mr-4" type="submit">Login</button>
-                        <button class="btn btn-outline-primary" type="submit">Register</button>
+                        <a href="{% url "login-page" %}" class="btn btn-outline-success mr-4" type="submit">Login</a>
+                        <a href="{% url "register-page" %}" class="btn btn-outline-primary" type="submit">Register</a>
                     </form>
                 </div>
             </div>
