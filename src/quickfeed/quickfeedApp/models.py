@@ -18,7 +18,8 @@ class Subscription(models.Model):
     from_date = models.DateTimeField()
     to_date = models.DateTimeField()
    
-class User(models.Model):
+class Users(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
@@ -32,7 +33,8 @@ class User(models.Model):
 
 
 @receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
+def create_User_profile(sender, instance, created, **kwargs):
     if created:
-        User.objects.create(user=instance)
-    instance.profile.save()
+        Users.objects.create(user=instance).save()
+   
+post_save.connect(create_User_profile, sender=User)
