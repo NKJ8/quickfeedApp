@@ -2,8 +2,7 @@
 from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 # Create your models here.
 
@@ -21,12 +20,14 @@ class Subscription(models.Model):
     to_date = models.DateTimeField()
    
 class User(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    phone = models.CharField(max_length=100)
-    dob = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    review_count = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=True)
+    email = models.CharField(max_length=100, null=True)
+    username = models.CharField(max_length=100, null=True)
+    password = models.CharField(max_length=100, null=True)
+    phone = models.CharField(max_length=100, null=True)
+    dob = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=100, null=True)
+    review_count = models.CharField(max_length=100, null=True)
     subscription_id = models.ForeignKey(Subscription, related_name='users', on_delete=models.SET_NULL, null=True)
 
     def __str__(self) -> str:
