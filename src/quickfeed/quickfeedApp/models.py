@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -28,8 +30,7 @@ class Users(models.Model):
     review_count = models.CharField(max_length=100)
     subscription_id = models.ForeignKey(Subscription, related_name='users', on_delete=models.SET_NULL, null=True)
 
-    def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+
 
 
 @receiver(post_save, sender=User)
@@ -37,4 +38,4 @@ def create_User_profile(sender, instance, created, **kwargs):
     if created:
         Users.objects.create(user=instance).save()
    
-post_save.connect(create_User_profile, sender=User)
+#post_save.connect(create_User_profile, sender=User)

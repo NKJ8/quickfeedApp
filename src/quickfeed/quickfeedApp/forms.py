@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class SignUpForm(UserCreationForm):
     dob = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
     address = forms.CharField(help_text='Enter address')
-    name = forms.CharField(help_text='Enter name')
-    phone = forms.CharField(help_text='Enter phone')
+    name = forms.TextInput(help_text='Enter name')
+    phone = forms.TextInput(help_text='Enter phone')
 
     class Meta:
         model = User

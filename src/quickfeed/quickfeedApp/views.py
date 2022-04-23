@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
 from .forms import SignUpForm
 from django.http import HttpResponse
+
+
 # Create your views here.
 # request handler
 # Action
