@@ -31,7 +31,7 @@ class User(models.Model):
     subscription_id = models.ForeignKey(Subscription, related_name='users', on_delete=models.SET_NULL, null=True)
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.name} {self.email}"
 
 class Business(models.Model):
     name = models.CharField(max_length=100)

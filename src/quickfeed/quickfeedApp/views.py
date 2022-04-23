@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
-from .forms import SignUpForm
+from .forms import LoginForm, SignUpForm
 from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import User
@@ -15,7 +15,25 @@ def homepage(request):
 
 
 def login(request):
-    return render(request, "login.html", {"title": "Login - Quickfeed"})
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+
+        if(form.is_valid()):
+            data = {}
+            data['user'] = User.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+
+            if(data['user']):
+                # get user data and send on profile page
+                return render(request, 'user-profile.html', {
+                    "data": data['user']
+                })
+            else:
+                form.add_error('email', "Please check your details.")
+    else:
+        form = LoginForm()
+    
+    return render(request, "login.html", {"form": form})
 
 
 def signup(request):
