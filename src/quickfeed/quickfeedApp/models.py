@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 from __future__ import unicode_literals
 
+=======
+
+from pyexpat import model
+>>>>>>> b9f63482cd25e1680f9554b82036fb71668db625
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 # Create your models here.
 
@@ -20,22 +24,62 @@ class Subscription(models.Model):
     from_date = models.DateTimeField()
     to_date = models.DateTimeField()
    
-class Users(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class User(models.Model):
+    name = models.CharField(max_length=100, null=True)
+    email = models.CharField(max_length=100, null=True)
+    username = models.CharField(max_length=100, null=True)
+    password = models.CharField(max_length=100, null=True)
+    phone = models.CharField(max_length=100, null=True)
+    dob = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=100, null=True)
+    review_count = models.CharField(max_length=100, null=True)
+    subscription_id = models.ForeignKey(Subscription, related_name='users', on_delete=models.SET_NULL, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.name} {self.email}"
+
+class Business(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     dob = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
     review_count = models.CharField(max_length=100)
-    subscription_id = models.ForeignKey(Subscription, related_name='users', on_delete=models.SET_NULL, null=True)
+    subscription_id = models.ForeignKey(Subscription, related_name='business', on_delete=models.SET_NULL, null=True)
+
+
+
+class CardDetails(models.Model):
+    card_number = models.CharField(max_length=20)
+    card_exp_month = models.CharField(max_length=2)
+    card_exp_year = models.CharField(max_length=4)
+    user_id = models.ForeignKey(User, related_name='card_details', on_delete=models.SET_NULL, null=True)
+
+class Reviews(models.Model):
+    review = models.CharField(max_length=20)
+    user_id = models.ForeignKey(User, related_name='users', on_delete=models.SET_NULL, null=True)
+    business_id = models.ForeignKey(Business, related_name='reviews', on_delete=models.SET_NULL, null=True)
+    anonymous = models.BooleanField(default=False)
+    date = models.DateTimeField()
+
+class Profile(models.Model):
+    business_id = models.ForeignKey(Business, related_name='profile', on_delete=models.SET_NULL, null=True)
+    total_reviews = models.CharField(max_length=20)
+    total_like = models.CharField(max_length=20)
+    total_ratings = models.CharField(max_length=20)
+    total_customers = models.CharField(max_length=20)
 
 
 
 
+
+<<<<<<< HEAD
 @receiver(post_save, sender=User)
 def create_User_profile(sender, instance, created, **kwargs):
     if created:
         Users.objects.create(user=instance).save()
    
 #post_save.connect(create_User_profile, sender=User)
+=======
+>>>>>>> b9f63482cd25e1680f9554b82036fb71668db625

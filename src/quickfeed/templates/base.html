@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>{% block 'page-title'%}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'app.css' %}" />
+    <link rel="stylesheet" href="{% static 'quickfeed/style.css' %}" />
     {% block 'page-styles' %}{% endblock %}
 </head>
 
@@ -60,7 +60,7 @@
                     </ul>
                     <form class="d-flex justify-content-around">
                         <a href="{% url "login-page" %}" class="btn btn-outline-success mr-4" type="submit">Login</a>
-                        <a href="{% url "register-page" %}" class="btn btn-outline-primary" type="submit">Register</a>
+                        <a href="{% url "signup-page" %}" class="btn btn-outline-primary" type="submit">Signup</a>
                     </form>
                 </div>
             </div>
