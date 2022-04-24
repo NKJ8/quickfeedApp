@@ -22,6 +22,7 @@ class Subscription(models.Model):
 class User(models.Model):
     name = models.CharField(max_length=100, null=True)
     email = models.CharField(max_length=100, null=True)
+    address = models.CharField(max_length=200, null=True)
     username = models.CharField(max_length=100, null=True)
     password = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=100, null=True)
@@ -36,10 +37,12 @@ class User(models.Model):
 class Business(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, null=True)
+    password = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=100)
-    dob = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
+    descriptions = models.CharField(max_length=1000)
     review_count = models.CharField(max_length=100)
     subscription_id = models.ForeignKey(Subscription, related_name='business', on_delete=models.SET_NULL, null=True)
 
