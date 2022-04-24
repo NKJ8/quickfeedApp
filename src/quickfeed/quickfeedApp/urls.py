@@ -10,7 +10,7 @@ urlpatterns = [
     path('login', views.login, name='login-page'),
     path('signup', views.signup, name='signup-page'),
     path('old', views.homepageold, name='oldhome'),
-    
+    # path('login', views.login, name='login-page'),
     # path('thank-you', views.)
     # re_path(r'^login/$', views.login,  name='login-page'),
     #re_path(r'^logout/$', views.logout, name='logout'),
