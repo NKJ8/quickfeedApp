@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-from __future__ import unicode_literals
-
-=======
 
 from pyexpat import model
->>>>>>> b9f63482cd25e1680f9554b82036fb71668db625
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -48,8 +43,6 @@ class Business(models.Model):
     review_count = models.CharField(max_length=100)
     subscription_id = models.ForeignKey(Subscription, related_name='business', on_delete=models.SET_NULL, null=True)
 
-
-
 class CardDetails(models.Model):
     card_number = models.CharField(max_length=20)
     card_exp_month = models.CharField(max_length=2)
@@ -71,15 +64,3 @@ class Profile(models.Model):
     total_customers = models.CharField(max_length=20)
 
 
-
-
-
-<<<<<<< HEAD
-@receiver(post_save, sender=User)
-def create_User_profile(sender, instance, created, **kwargs):
-    if created:
-        Users.objects.create(user=instance).save()
-   
-#post_save.connect(create_User_profile, sender=User)
-=======
->>>>>>> b9f63482cd25e1680f9554b82036fb71668db625

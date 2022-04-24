@@ -1,15 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
-<<<<<<< HEAD
-from .forms import SignUpForm
-from django.http import HttpResponse
-
-=======
 from .forms import LoginForm, SignUpForm
 from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import User
->>>>>>> b9f63482cd25e1680f9554b82036fb71668db625
 
 # Create your views here.
 # request handler
@@ -27,7 +21,8 @@ def login(request):
 
         if(form.is_valid()):
             data = {}
-            data['user'] = User.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+            data['user'] = User.objects.filter(email = form.cleaned_data['email'], 
+            password= form.cleaned_data['password']).values().first()
 
             if(data['user']):
                 # get user data and send on profile page
@@ -49,10 +44,11 @@ def signup(request):
         if(form.is_valid() and (form.cleaned_data['password'] == form.cleaned_data['cnf_password'])):
             user = User(
                 email = form.cleaned_data['email'],
-                password = form.cleaned_data['password']
+                password = form.cleaned_data['password'],
+                dob = form.cleaned_data['birth_date']
             )
             user.save()
-            return render(request, 'thank-you.html', {"title": "Thank you for registration"})
+            return render(request, 'user-profile.html', {"title": "Thank you for registration"})
         else:
             form.add_error('cnf_password', "Please confirm password correctly")
     else:

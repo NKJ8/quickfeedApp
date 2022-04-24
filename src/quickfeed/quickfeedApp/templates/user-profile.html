@@ -7,8 +7,11 @@
 {% endblock 'page-title' %}
 
 {% block 'page-content' %}
-    <h1>Welcome - {% for field in data %}
+    <h1>Welcome - </h1>
+        {% comment %} {% for field in data %} 
         {{data[field]}}
-        {% endfor %}</h1>
-    {% comment %} <h1>Welcome - {{ user.password }}</h1> {% endcomment %}
+        {% endfor %}
+    {% endcomment %}
+     <h1>Welcome - {{ user.password }}</h1> 
+     {{data['user']}}
 {% endblock %}
