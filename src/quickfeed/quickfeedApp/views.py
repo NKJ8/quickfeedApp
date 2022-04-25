@@ -3,7 +3,7 @@ from django.contrib.auth import login as auth_login, authenticate
 from .forms import LoginForm, SignUpForm
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .models import User
+from .models import Business, User
 
 # Create your views here.
 # request handler
@@ -21,12 +21,21 @@ def login(request):
 
         if(form.is_valid()):
             data = {}
-            data['user'] = User.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+
+            if(form.cleaned_data['is_service_provider']):
+                data['business'] = Business.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+            else:
+                data['user'] = User.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
 
             if(data['user']):
                 # get user data and send on profile page
                 return render(request, 'user-profile.html', {
                     "data": data['user']
+                })
+            if(data['business']):
+                # get user data and send on profile page
+                return render(request, 'business-profile.html', {
+                    "data": data['business']
                 })
             else:
                 form.add_error('email', "Please check your details.")

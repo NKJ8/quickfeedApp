@@ -17,7 +17,7 @@
                     <form action='login' method="POST"> 
                         {% csrf_token %}               
                         <div class="divider d-flex align-items-center my-4 justify-content-center">
-                            <p class="lead fw-normal mb-0 me-3">Login</p>
+                            <p class="lead fw-normal mb-0 me-3">Welcome Service Provider</p>
                         </div>
                         <hr>
                         {% for field in form %}
@@ -32,21 +32,13 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <button type="submit" class="btn btn-primary btn-lg"
                             >Login</button>
-                            <!-- Checkbox -->
-                            {% comment %} <div class="form-check mb-0">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                                <label class="form-check-label" for="form2Example3">
-                                Remember me
-                                </label>
-                            </div> {% endcomment %}
-                            {% comment %} <a href="{% url 'login-as-service-provider' %}" class="text-body">Login as Service Provider</a> {% endcomment %}
+                            <a href="#!" class="text-body">Forgot password?</a>
                         </div>
-                        
+            
                         <div class="text-center text-lg-start">
                             
                             <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href={% url 'signup-page' %}
                                 class="link-danger">Signup</a></p>
-                            <a href="#!" class="text-body">Forgot password?</a>
                         </div>
                     </form>
                 </div>

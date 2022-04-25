@@ -1,4 +1,5 @@
 
+from email.policy import default
 from django import forms
 # from django.contrib.auth.forms import UserCreationForm
 from .models import User
@@ -31,3 +32,5 @@ class LoginForm(forms.Form):
         'required': "Password is required",
         'max_length': "Please enter a shorter password"
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    is_service_provider = forms.BooleanField(label="Login as service provider", widget=forms.CheckboxInput(attrs={'class': 'form-check-input me-2 ml-2'}))
