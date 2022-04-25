@@ -58,10 +58,16 @@
                             </ul>
                         </li> {% endcomment %}
                     </ul>
-                    <form class="d-flex justify-content-around">
-                        <a href="{% url "login-page" %}" class="btn btn-outline-success mr-4" type="submit">Login</a>
-                        <a href="{% url "signup-page" %}" class="btn btn-outline-primary" type="submit">User Signup</a>
-                        <a href="{% url "signup-page-business" %}" class="btn btn-outline-primary" type="submit">Business User SignUp</a>
+                    <form class="d-flex justify-content-around" style="width: 40%;">
+                        {{request.session.is_logged_in}}
+                        {% if request.session.is_logged_in == True %}
+                            <a href="{% url "login-page" %}" class="btn btn-outline-info mr-4" type="submit">Profile</a>
+                            <a href="{% url "logout-user" %}" class="btn btn-outline-danger mr-4" type="submit">Logout</a>
+                        {% else %}
+                            <a href="{% url "login-page" %}" class="btn btn-outline-success mr-4" type="submit">Login</a>
+                            <a href="{% url "signup-page" %}" class="btn btn-outline-primary" type="submit">User Signup</a>
+                            <a href="{% url "signup-page-business" %}" class="btn btn-outline-primary" type="submit">Business User SignUp</a>
+                        {% endif %}
                     </form>
                 </div>
             </div>

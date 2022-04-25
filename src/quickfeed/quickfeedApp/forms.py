@@ -4,7 +4,6 @@ from django.core.validators import validate_email
 from .models import User
 
 class SignUpForm(forms.Form):
-  
 
     email = forms.EmailField(label='Email address', required=True,validators=[validate_email], error_messages={
         'required': "Email is required",
@@ -20,10 +19,6 @@ class SignUpForm(forms.Form):
         'required': "Password is required",
         'max_length': "Please enter a shorter password"
     }, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
-
-    #password = forms.CharField(widget =forms.PasswordInput())
-
-    #cnf_password = forms.CharField(widget =forms.PasswordInput())
 
     cnf_password = forms.CharField(label='Confirm password', required=True, error_messages={
         'required': "Confirm password is required",
@@ -62,7 +57,7 @@ class LoginForm(forms.Form):
         'max_length': "Please enter a shorter password"
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 
-    is_service_provider = forms.BooleanField(label="Login as service provider", widget=forms.CheckboxInput(attrs={'class': 'form-check-input me-2 ml-2'}))
+    is_service_provider = forms.BooleanField(label="Login as service provider",required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input me-2 ml-2'}))
 
 class SignUpFormBusiness(forms.Form):
 
@@ -106,7 +101,18 @@ class SignUpFormBusiness(forms.Form):
        
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 
-    descriptions = forms.CharField(label='Descriptions', required=True, error_messages={
-        'required': "Descriptions is required",
-       
-    }, widget=forms.Textarea(attrs={'class': 'form-control form-control-lg'}))
+    state = forms.CharField(label='State', required=True, error_messages={
+        'required': "State is required",
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    zipcode = forms.CharField(label='Zip code', required=True, error_messages={
+        'required': "Zip code is required",
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    # is_open = forms.BooleanField(label='Is Open', required=True, error_messages={
+    #     'required': "Is Open is required",
+    # }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    # descriptions = forms.CharField(label='Descriptions', required=True, error_messages={
+    #     'required': "Descriptions is required",
+    # }, widget=forms.Textarea(attrs={'class': 'form-control form-control-lg'}))

@@ -11,6 +11,7 @@ urlpatterns = [
     path('signup', views.signup, name='signup-page'),
     path('signupbusiness', views.signupbusiness, name='signup-page-business'),
     path('old', views.homepageold, name='oldhome'),
+    path('logout-user', views.logout, name='logout-user'),
     # path('login', views.login, name='login-page'),
     # path('thank-you', views.)
     # re_path(r'^login/$', views.login,  name='login-page'),
