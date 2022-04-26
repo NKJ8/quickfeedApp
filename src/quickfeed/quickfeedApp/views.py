@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
-from .forms import LoginForm, SignUpForm, SignUpFormBusiness
+from .forms import ForgotPwdForm, LoginForm, SignUpForm, SignUpFormBusiness
 from django.http import HttpResponse, HttpResponseRedirect
 import re
 from .models import User, Business
@@ -15,6 +15,9 @@ from pprint import pprint
 
 def homepage(request):
     return render(request, "index.html", {"title": "Welcome to quickfeed"})
+
+def about_us(request):
+    return render(request, "about-us.html", {"title": "About Us - Quickfeed"})
 
 
 def login(request):
@@ -33,28 +36,28 @@ def login(request):
             pprint({"Form": form.cleaned_data, "data": data})
             if('user' in data.keys() and data['user'] != None):
                 # get user data and send on profile page
-                request.session['is_logged_in'] = True
-                request.session['user'] = data['user']
+                data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'])
                 
                 return render(request, 'user-profile.html', {
-                    "data": data['user']
+                    "data": data
                 })
             if( 'business' in data.keys() and data['business'] != None):
                 # get user data and send on profile page
-                request.session['is_logged_in'] = True
-                request.session['user'] = data['business']
+                data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'], False)
 
                 # request.session['email'] = email
                 return render(request, 'business-profile.html', {
-                    "data": data['business']
+                    "data": data
                 })
 
             else:
                 form.add_error('email', "Please check your details.")
     else:
         form = LoginForm()
+
+    message = ""
     
-    return render(request, "login.html", {"form": form})
+    return render(request, "login.html", {"form": form, "message": message})
 
 
 def signup(request):
@@ -74,7 +77,12 @@ def signup(request):
                         name = form.cleaned_data['name']
                     )
                     user.save()
-                    return render(request, 'thank-you.html', {"title": "Thank you for Registering"})
+
+                    data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'])
+
+                    return render(request, 'user-profile.html', {
+                        "data": data
+                    })
                 else:
                     form.add_error('password', "Password lenght should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")       
             else:
@@ -108,7 +116,12 @@ def signupbusiness(request):
                         name = form.cleaned_data['name']
                     )
                     business.save()
-                    return render(request, 'business-profile.html', {"title": "Thank you for Registering"})
+
+                    data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'], False)
+                    # pprint({data: data})
+                    return render(request, 'business-profile.html', {
+                        "data": data
+                    })
                     # return redirect('login-page')
                 else:
                     form.add_error('password', "Password lenght should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")    
@@ -124,24 +137,7 @@ def signupbusiness(request):
         "title": "Business User Signup - Quickfeed"
     })
 
-# return HttpResponseRedirect("/thank-you")
-# def signup(request):
-#     if request.method == "POST":
-#         form = SignUpForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             user.refresh_from_db()  # load the profile instance created by the signal
-#             user.dob = form.cleaned_data.get("dob")
-#             user.name = form.cleaned_data.get("name")
-#             user.address = form.cleaned_data.get("address")
-#             user.save()
-#             raw_password = form.cleaned_data.get("password1")
-#             user = authenticate(username=user.username, password=raw_password)
-#             auth_login(request, user)
-#             return redirect("homepage")
-#     else:
-#         form = SignUpForm()
-#     return render(request, "signup.html", {"form": form})
+
 
 def homepageold(request):
     return render(request, "homepage.html", {"title": "OLD Welcome to quickfeed"})
@@ -151,5 +147,64 @@ def logout(request):
     request.session['user'] = None
     return redirect("login-page")
 
+def profile(request):
+    data = request.session['user']
+    return render(request, 'user-profile.html', {
+        "data": data
+    })
 
 
+def set_session(request, email, password, user=True):
+    request.session['is_logged_in'] = True
+    data = {}
+    request.session['is_logged_in'] = True
+    if(user == True):
+        data = User.objects.filter(email = email, password= password).values().first()
+    else: 
+        data = Business.objects.filter(email = email, password= password).values().first()
+
+    request.session['user'] = data
+    return data
+
+def forgot_password(request):
+
+    if request.method == 'POST':
+        form = ForgotPwdForm(request.POST)
+
+        if(form.is_valid()):
+
+            user = User.objects.filter(email = form.cleaned_data['email']).first()
+
+            if user == None:
+                form.add_error('email', "User not found , please check your email.")
+                return render(request, 'forgot-password.html', {
+                    "form": form,
+                    "title": "Forgot Password - Quickfeed"
+                })
+
+            if((form.cleaned_data['password'] != form.cleaned_data['cnf_password'])):
+                form.add_error('password', "Password does not match.")
+                return render(request, 'forgot-password.html', {
+                    "form": form,
+                    "title": "Forgot Password - Quickfeed"
+                })
+
+            my_queryset = User.objects.filter(email = form.cleaned_data['email']).update(password= form.cleaned_data['password'])
+            
+            pprint({my_queryset: my_queryset})
+
+            form = LoginForm()
+
+            message = "Passoword has been changed successfully."
+    
+            return render(request, "login.html", {"form": form, "message": message})
+
+        else:
+            form.add_error('email', "User not found , please check your email.")
+    else:
+        form = ForgotPwdForm()
+
+    return render(request, 'forgot-password.html', {
+        "form": form,
+        "title": "Forgot Password - Quickfeed"
+    })

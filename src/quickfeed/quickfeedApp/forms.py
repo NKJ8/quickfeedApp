@@ -116,3 +116,21 @@ class SignUpFormBusiness(forms.Form):
     # descriptions = forms.CharField(label='Descriptions', required=True, error_messages={
     #     'required': "Descriptions is required",
     # }, widget=forms.Textarea(attrs={'class': 'form-control form-control-lg'}))
+
+
+
+class ForgotPwdForm(forms.Form):
+    email = forms.CharField(label='Email address', required=True, error_messages={
+        'required': "Email is required",
+        'max_length': "Please enter a shorter email"
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    password = forms.CharField(label='Enter password', required=True, error_messages={
+        'required': "Password is required",
+        'max_length': "Please enter a shorter password"
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    cnf_password = forms.CharField(label='Confirm password', required=True, error_messages={
+        'required': "Password is required",
+        'max_length': "Please enter a shorter password"
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
