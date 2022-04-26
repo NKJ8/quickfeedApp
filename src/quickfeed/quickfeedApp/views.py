@@ -55,7 +55,7 @@ def signup(request):
                     user.save()
                     return render(request, 'thank-you.html', {"title": "Thank you for Registering"})
                 else:
-                    form.add_error('password', "Password lenght should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")       
+                    form.add_error('password', "Password length should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")       
             else:
                 form.add_error('username', "The username you have entered has been taken.")    
         else:
@@ -88,7 +88,7 @@ def signupbusiness(request):
                     user.save()
                     return render(request, 'thank-you.html', {"title": "Thank you for Registering"})
                 else:
-                    form.add_error('password', "Password lenght should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")    
+                    form.add_error('password', "Password length should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")    
             else:
                 form.add_error('username', "The username you have entered has been taken.")    
         else:

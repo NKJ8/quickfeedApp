@@ -23,10 +23,6 @@ class SignUpForm(forms.Form):
         'max_length': "Please enter a shorter password"
     }, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
 
-    #password = forms.CharField(widget =forms.PasswordInput())
-
-    #cnf_password = forms.CharField(widget =forms.PasswordInput())
-
     cnf_password = forms.CharField(label='Confirm password', required=True, error_messages={
         'required': "Confirm password is required",
         'max_length': "Please enter a shorter confirm password"
@@ -47,7 +43,8 @@ class SignUpForm(forms.Form):
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 
-    phone = forms.CharField(label='Phone Number', required=True, error_messages={
+    phone = forms.IntegerField(label='Phone Number', required=True, error_messages={
+          'invalid' :'Enter valid phone number.',
         'required': "Phone Number is required",
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
@@ -97,7 +94,8 @@ class SignUpFormBusiness(forms.Form):
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 
-    phone = forms.CharField(label='Phone Number', required=True, error_messages={
+    phone = forms.IntegerField(label='Phone Number', required=True, error_messages={
+        'invalid' :'Enter valid phone number.',
         'required': "Phone Number is required",
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
