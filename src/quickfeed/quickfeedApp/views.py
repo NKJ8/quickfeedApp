@@ -29,21 +29,21 @@ def login(request):
             data = {}
 
             if(form.cleaned_data['is_service_provider'] == True):
-                data['business'] = Business.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+                data['business'] = Business.objects.filter(username = form.cleaned_data['username'], password= form.cleaned_data['password']).values().first()
             else:
-                data['user'] = User.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+                data['user'] = User.objects.filter(username = form.cleaned_data['username'], password= form.cleaned_data['password']).values().first()
 
             pprint({"Form": form.cleaned_data, "data": data})
             if('user' in data.keys() and data['user'] != None):
                 # get user data and send on profile page
-                data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'])
+                data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'])
                 
                 return render(request, 'user-profile.html', {
                     "data": data
                 })
             if( 'business' in data.keys() and data['business'] != None):
                 # get user data and send on profile page
-                data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'], False)
+                data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'], False)
 
                 # request.session['email'] = email
                 return render(request, 'business-profile.html', {
@@ -51,7 +51,7 @@ def login(request):
                 })
 
             else:
-                form.add_error('email', "Please check your details.")
+                form.add_error('username', "Please check your login details.")
     else:
         form = LoginForm()
 

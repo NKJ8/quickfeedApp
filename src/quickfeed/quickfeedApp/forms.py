@@ -47,9 +47,9 @@ class SignUpForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    email = forms.CharField(label='Email address', required=True, error_messages={
-        'required': "Email is required",
-        'max_length': "Please enter a shorter email"
+    username = forms.CharField(label='Username', required=True, error_messages={
+        'required': "Username is required",
+        'max_length': "Please enter a shorter username"
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 
     password = forms.CharField(label='Enter password', required=True, error_messages={
