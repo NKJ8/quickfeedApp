@@ -55,7 +55,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='Enter password', required=True, error_messages={
         'required': "Password is required",
         'max_length': "Please enter a shorter password"
-    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+    }, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
 
     is_service_provider = forms.BooleanField(label="Login as service provider",required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input me-2 ml-2'}))
 
@@ -128,9 +128,9 @@ class ForgotPwdForm(forms.Form):
     password = forms.CharField(label='Enter password', required=True, error_messages={
         'required': "Password is required",
         'max_length': "Please enter a shorter password"
-    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+    }, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
 
     cnf_password = forms.CharField(label='Confirm password', required=True, error_messages={
         'required': "Password is required",
         'max_length': "Please enter a shorter password"
-    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+    }, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
