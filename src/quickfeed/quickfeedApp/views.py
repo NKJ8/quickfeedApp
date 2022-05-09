@@ -84,7 +84,7 @@ def signup(request):
                         "data": data
                     })
                 else:
-                    form.add_error('password', "Password lenght should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")       
+                    form.add_error('password', "Password length should be atleast 12, contain atleast one A-Z Capital letter, one number 0-9 and a special character")       
             else:
                 form.add_error('username', "The username you have entered has been taken.")    
         else:

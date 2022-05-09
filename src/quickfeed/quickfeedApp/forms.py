@@ -5,7 +5,7 @@ from .models import User
 
 class SignUpForm(forms.Form):
 
-    email = forms.EmailField(label='Email address', required=True,validators=[validate_email], error_messages={
+    email = forms.EmailField(label='Email address', required=True,error_messages={
         'required': "Email is required",
         'max_length': "Please enter a shorter email"
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
@@ -57,7 +57,7 @@ class LoginForm(forms.Form):
         'max_length': "Please enter a shorter password"
     }, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
 
-    is_service_provider = forms.BooleanField(label="Login as service provider",required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input me-2 ml-2'}))
+    is_service_provider = forms.BooleanField(label="Check to Login as a Service Provider",required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input me-2 ml-2'}))
 
 class SignUpFormBusiness(forms.Form):
 
