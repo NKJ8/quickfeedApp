@@ -154,14 +154,14 @@ def profile(request):
     })
 
 
-def set_session(request, email, password, user=True):
+def set_session(request, username, password, user=True):
     request.session['is_logged_in'] = True
     data = {}
     request.session['is_logged_in'] = True
     if(user == True):
-        data = User.objects.filter(email = email, password= password).values().first()
+        data = User.objects.filter(username = username, password= password).values().first()
     else: 
-        data = Business.objects.filter(email = email, password= password).values().first()
+        data = Business.objects.filter(username = username, password= password).values().first()
 
     request.session['user'] = data
     return data
