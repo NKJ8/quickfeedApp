@@ -78,7 +78,7 @@ def signup(request):
                     )
                     user.save()
 
-                    data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'])
+                    data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'])
 
                     return render(request, 'user-profile.html', {
                         "data": data
@@ -117,7 +117,7 @@ def signupbusiness(request):
                     )
                     business.save()
 
-                    data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'], False)
+                    data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'], False)
                     # pprint({data: data})
                     return render(request, 'business-profile.html', {
                         "data": data

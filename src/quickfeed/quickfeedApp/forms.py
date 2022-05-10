@@ -40,7 +40,7 @@ class SignUpForm(forms.Form):
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 
-    phone = forms.CharField(label='Phone Number', required=True, error_messages={
+    phone = forms.IntegerField(label='Phone Number', required=True, error_messages={
         'required': "Phone Number is required",
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
@@ -91,7 +91,7 @@ class SignUpFormBusiness(forms.Form):
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
 
-    phone = forms.CharField(label='Phone Number', required=True, error_messages={
+    phone = forms.IntegerField(label='Phone Number', required=True, error_messages={
         'required': "Phone Number is required",
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
