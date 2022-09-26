@@ -29,21 +29,21 @@ def login(request):
             data = {}
 
             if(form.cleaned_data['is_service_provider'] == True):
-                data['business'] = Business.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+                data['business'] = Business.objects.filter(username = form.cleaned_data['username'], password= form.cleaned_data['password']).values().first()
             else:
-                data['user'] = User.objects.filter(email = form.cleaned_data['email'], password= form.cleaned_data['password']).values().first()
+                data['user'] = User.objects.filter(username = form.cleaned_data['username'], password= form.cleaned_data['password']).values().first()
 
             pprint({"Form": form.cleaned_data, "data": data})
             if('user' in data.keys() and data['user'] != None):
                 # get user data and send on profile page
-                data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'])
+                data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'])
                 
                 return render(request, 'user-profile.html', {
                     "data": data
                 })
             if( 'business' in data.keys() and data['business'] != None):
                 # get user data and send on profile page
-                data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'], False)
+                data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'], False)
 
                 # request.session['email'] = email
                 return render(request, 'business-profile.html', {
@@ -51,7 +51,7 @@ def login(request):
                 })
 
             else:
-                form.add_error('email', "Please check your details.")
+                form.add_error('username', "Please check your login details.")
     else:
         form = LoginForm()
 
@@ -78,13 +78,13 @@ def signup(request):
                     )
                     user.save()
 
-                    data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'])
+                    data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'])
 
                     return render(request, 'user-profile.html', {
                         "data": data
                     })
                 else:
-                    form.add_error('password', "Password lenght should be atleast 12, should contain A-Z Capital letter, a number 0-9 and a special character")       
+                    form.add_error('password', "Password length should be atleast 12, contain atleast one A-Z Capital letter, one number 0-9 and a special character")       
             else:
                 form.add_error('username', "The username you have entered has been taken.")    
         else:
@@ -117,7 +117,7 @@ def signupbusiness(request):
                     )
                     business.save()
 
-                    data = set_session(request, form.cleaned_data['email'], form.cleaned_data['password'], False)
+                    data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'], False)
                     # pprint({data: data})
                     return render(request, 'business-profile.html', {
                         "data": data
@@ -154,14 +154,14 @@ def profile(request):
     })
 
 
-def set_session(request, email, password, user=True):
+def set_session(request, username, password, user=True):
     request.session['is_logged_in'] = True
     data = {}
     request.session['is_logged_in'] = True
     if(user == True):
-        data = User.objects.filter(email = email, password= password).values().first()
+        data = User.objects.filter(username = username, password= password).values().first()
     else: 
-        data = Business.objects.filter(email = email, password= password).values().first()
+        data = Business.objects.filter(username = username, password= password).values().first()
 
     request.session['user'] = data
     return data
