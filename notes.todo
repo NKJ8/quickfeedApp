@@ -1,0 +1,14 @@
+DEVELOPMENT_SERVER:
+        Public DNS:
+            ec2-54-209-178-208.compute-1.amazonaws.com
+        User name:
+            Administrator
+        Password:
+            y@SE3&5c%s?9=nxa2PGMPiLb7%rp2%Yg
+
+
+Production Server:
+    ec2-34-207-123-126.compute-1.amazonaws.com
+
+    Password: 
+        bW7cSj3PcZnOzpU;;t-tyIb6D9NjW72?
