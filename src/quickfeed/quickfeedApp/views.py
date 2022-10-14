@@ -156,15 +156,16 @@ def profile(request):
         "data": data
     })
 
-
-def update_user_profile(request):
-    print("DATA", request.POST)
-    form = request.POST
-
-    pprint({
-        "form": form
+def service_details(request, service):
+    print("service", service)
+    data = request.session['user']
+    return render(request, 'service-details.html', {
+        "data": data
     })
 
+
+def update_user_profile(request):
+    form = request.POST
     errors = {}
     success = ""
     data = {}
@@ -194,35 +195,34 @@ def update_user_profile(request):
             if(form['address'].strip() == ""):
                 errors['address'] = "Address is required"
             
-            # print("USER", request.session['user']['id'])
 
             print("Errors", errors)
+            print("Sesssion", request.session['user'])
 
 
             if(len(errors) == 0):
                 # search the user in DB
-                user = User.objects.get(id = request.session['user']['id'])
+                id = request.session['user']['id']
+                user = User.objects.get(id = id)
                 # update the user details and then save user
-                user.city = form['city']
                 user.dob = form['dob']
                 user.email = form['email']
                 user.name = form['name']
                 user.phone = form['phone']
                 user.state = form['state']
                 user.zipcode = form['zipcode']
+                user.city = form['city']
                 user.address = form['address']
                 user.save()
 
-                data = set_session(request, request.session['user_name'], request.session['password'], TRUE)
-
-                print("data", data)
-
                 success = "Data has been updated successfully."
+                data = set_session(request, request.session['user_name'], request.session['password'], True)
                 # return errors and success messages
+            else:
+                data = form
 
             print("Username", request.session['user_name'])
             print("Password", request.session['password'])
-
             
             return render(request, 'user-profile.html', {
                 "data": data,
@@ -231,7 +231,71 @@ def update_user_profile(request):
             })
 
             
+def update_business_profile(request):
+    form = request.POST
+    errors = {}
+    success = ""
+    data = {}
+    if request.method == 'POST':
 
+            if(form['name'].strip() == ""):
+                errors['name'] = "Name is required"
+            
+            if(form['phone'].strip() == ""):
+                errors['phone'] = "Phone is required"
+            
+            if(form['state'].strip() == ""):
+                errors['state'] = "State is required"
+            
+            if(form['zipcode'].strip() == ""):
+                errors['zipcode'] = "Zipcode is required"
+            
+            if(form['is_open'].strip() == ""):
+                errors['is_open'] = "Business status is required"
+
+            if(form['city'].strip() == ""):
+                errors['city'] = "City is required"
+
+            if(form['email'].strip() == ""):
+                errors['email'] = "Email is required"
+
+            if(form['address'].strip() == ""):
+                errors['address'] = "Address is required"
+            
+
+            print("Errors", errors)
+            print("Sesssion", request.session['user'])
+
+
+            if(len(errors) == 0):
+                # search the user in DB
+                id = request.session['user']['id']
+                user = Business.objects.get(id = id)
+                # update the user details and then save user
+                user.is_open = form['is_open']
+                user.email = form['email']
+                user.name = form['name']
+                user.phone = form['phone']
+                user.state = form['state']
+                user.zipcode = form['zipcode']
+                user.city = form['city']
+                user.address = form['address']
+                user.save()
+
+                success = "Data has been updated successfully."
+                data = set_session(request, request.session['user_name'], request.session['password'], False)
+                # return errors and success messages
+            else:
+                data = form
+
+            print("Username", request.session['user_name'])
+            print("Password", request.session['password'])
+            
+            return render(request, 'business-profile.html', {
+                "data": data,
+                "errors": errors,
+                "success": success
+            })
 
 
 def set_session(request, username, password, user=True):

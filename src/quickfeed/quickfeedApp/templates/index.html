@@ -33,69 +33,77 @@
                 {% comment %} Discover section {% endcomment %}
                 <div class="col-md-12">
                     <div class="row p-5 bg-light border rounded-3">
-                        <h1>Discover</h1>
+                        <h1>Popular Services</h1>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/Resturant.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "https://st2.depositphotos.com/3682225/11228/v/600/depositphotos_112288198-stock-illustration-automotive-repair-icon-car-service.jpg" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://st2.depositphotos.com/3682225/11228/v/600/depositphotos_112288198-stock-illustration-automotive-repair-icon-car-service.jpg" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Auto Repair</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="{% url "service-details" 1 %}" class="btn btn-primary ">Auto Repair</a>
                             </div>
                         </div>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/hotels.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "quickfeed/images/hotels.PNG" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://images.ctfassets.net/990581qemznk/2ZMxpLuwAjAXUUjVQGIEYa/7f00a576456a0233c20f1cfb5089732e/PlumbingLogoWithWrench.jpg" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Plumber</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary ">Plumbing</a>
                             </div>
                         </div>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/lcok.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "quickfeed/images/lcok.PNG" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://media.istockphoto.com/vectors/moving-service-delivery-sign-two-movers-porters-carry-symbol-loader-vector-id1061947006?k=20&m=1061947006&s=612x612&w=0&h=gxZ7mjLK766WCpQqaGQnov4rHi64eO-gIyoQbtNhEsU=" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Movers</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary ">Movers</a>
                             </div>
                         </div>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/dryclean.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "quickfeed/images/dryclean.PNG" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://i.pinimg.com/originals/44/fd/85/44fd85fcbb27bc44c804d078a48c69eb.png" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Home Cleaners</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary ">Home Cleaners</a>
                             </div>
                         </div>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/meuseums.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "quickfeed/images/meuseums.PNG" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://i.pinimg.com/originals/f3/02/a8/f302a84692fef91e7cc55815e1522f66.png" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Dry Cleaners</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary ">Dry Cleaners</a>
                             </div>
                         </div>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/bars.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "quickfeed/images/bars.PNG" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://t3.ftcdn.net/jpg/03/30/45/76/360_F_330457670_QdJI6oxOJLJ2WKtM1tFwBRFmqjs7UW2k.jpg" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Saloon</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary ">Saloon</a>
                             </div>
                         </div>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/Bakery.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "quickfeed/images/Bakery.PNG" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://image.shutterstock.com/image-vector/locksmith-logo-design-260nw-1196362351.jpg" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Locksmith</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary ">Locksmith</a>
                             </div>
                         </div>
                         <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/cafe.PNG" %}" alt="home"/>
+                            {% comment %} <img class="card-img-top h-75" src="{% static "quickfeed/images/cafe.PNG" %}" alt="home"/> {% endcomment %}
+                            <img class="card-img-top h-75" src="https://img.freepik.com/premium-vector/gradient-towing-logo-template_23-2149343856.jpg?w=2000" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                            <h5 class="card-title">Towing</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary ">Towing</a>
                             </div>
                         </div>
                     </div>
@@ -109,7 +117,7 @@
                 {% comment %} Discover section {% endcomment %}
                 <div class="col-md-12">
                     <div class="row p-5 bg-light border rounded-3">
-                        <h1>Top Reviews Near You!</h1>
+                        <h1>Top Service Providers!</h1>
                         <div class="card m-4" style="width: 16rem;">
                             <img class="card-img-top h-75" src="{% static "quickfeed/images/Resturant.PNG" %}" alt="home"/>
                             <div class="card-body text-center">

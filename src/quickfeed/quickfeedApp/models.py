@@ -23,9 +23,9 @@ class User(models.Model):
     name = models.CharField(max_length=100, null=True)
     email = models.CharField(max_length=100, null=True)
     address = models.CharField(max_length=200, null=True)
-    # city = models.CharField(max_length=100)
-    # state = models.CharField(max_length=100)
-    # zipcode = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zipcode = models.CharField(max_length=100)
     username = models.CharField(max_length=100, null=True)
     password = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=100, null=True)
@@ -36,6 +36,14 @@ class User(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} {self.email}"
+
+class Service(models.Model):
+    description = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+    category_id = models.ForeignKey(Category, related_name='category', on_delete=models.SET_NULL, null=True)
+    price = models.CharField(max_length=20)
+    tags = models.CharField(max_length=20)
+    time_required = models.CharField(max_length=20)
 
 class Business(models.Model):
     name = models.CharField(max_length=100)
@@ -50,6 +58,7 @@ class Business(models.Model):
     is_open = models.BooleanField(max_length=100, null=True)
     descriptions = models.CharField(max_length=1000, null=True)
     review_count = models.CharField(max_length=100, null=True)
+    service_id = models.ForeignKey(Service, related_name='card_details', on_delete=models.SET_NULL, null=True)
     subscription_id = models.ForeignKey(Subscription, related_name='business', on_delete=models.SET_NULL, null=True)
 
     def __str__(self) -> str:
@@ -73,7 +82,7 @@ class Profile(models.Model):
     total_reviews = models.CharField(max_length=20)
     total_like = models.CharField(max_length=20)
     total_ratings = models.CharField(max_length=20)
-    total_customers = models.CharField(max_length=20)
+    total_customers = models.CharField(max_length=20)    
 
 
 

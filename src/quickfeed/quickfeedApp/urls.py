@@ -15,6 +15,9 @@ urlpatterns = [
     path('old', views.homepageold, name='oldhome'),
     path('logout-user', views.logout, name='logout-user'),
     path('user-profile-update', views.update_user_profile, name='update-user-profile'),
+    path('business-profile-update', views.update_business_profile, name='update-business-profile'),
+    path('service-details/<int:service>', views.service_details, name='service-details'),
+
     path('profile', views.profile, name='profile-page'),
     
     path('forgot-password', views.forgot_password, name='forgot-password-page'),
