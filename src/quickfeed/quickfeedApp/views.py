@@ -1,6 +1,7 @@
+from pickle import FALSE, TRUE
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
-from .forms import ForgotPwdForm, LoginForm, SignUpForm, SignUpFormBusiness
+from .forms import ForgotPwdForm, LoginForm, SignUpForm, SignUpFormBusiness, UpdateProfileForm
 from django.http import HttpResponse, HttpResponseRedirect
 import re
 from .models import User, Business
@@ -33,13 +34,14 @@ def login(request):
             else:
                 data['user'] = User.objects.filter(username = form.cleaned_data['username'], password= form.cleaned_data['password']).values().first()
 
-            pprint({"Form": form.cleaned_data, "data": data})
+            # pprint({"Form": form.cleaned_data, "data": data})
             if('user' in data.keys() and data['user'] != None):
                 # get user data and send on profile page
                 data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'])
                 
                 return render(request, 'user-profile.html', {
-                    "data": data
+                    "data": data,
+                    "form": UpdateProfileForm()
                 })
             if( 'business' in data.keys() and data['business'] != None):
                 # get user data and send on profile page
@@ -47,7 +49,8 @@ def login(request):
 
                 # request.session['email'] = email
                 return render(request, 'business-profile.html', {
-                    "data": data
+                    "data": data,
+                    "form": UpdateProfileForm()
                 })
 
             else:
@@ -154,15 +157,95 @@ def profile(request):
     })
 
 
+def update_user_profile(request):
+    print("DATA", request.POST)
+    form = request.POST
+
+    pprint({
+        "form": form
+    })
+
+    errors = {}
+    success = ""
+    data = {}
+    if request.method == 'POST':
+
+            if(form['name'].strip() == ""):
+                errors['name'] = "Name is required"
+            
+            if(form['phone'].strip() == ""):
+                errors['phone'] = "Phone is required"
+            
+            if(form['state'].strip() == ""):
+                errors['state'] = "State is required"
+            
+            if(form['zipcode'].strip() == ""):
+                errors['zipcode'] = "Zipcode is required"
+            
+            if(form['dob'].strip() == ""):
+                errors['dob'] = "Date of birth is required"
+
+            if(form['city'].strip() == ""):
+                errors['city'] = "City is required"
+
+            if(form['email'].strip() == ""):
+                errors['email'] = "Email is required"
+
+            if(form['address'].strip() == ""):
+                errors['address'] = "Address is required"
+            
+            # print("USER", request.session['user']['id'])
+
+            print("Errors", errors)
+
+
+            if(len(errors) == 0):
+                # search the user in DB
+                user = User.objects.get(id = request.session['user']['id'])
+                # update the user details and then save user
+                user.city = form['city']
+                user.dob = form['dob']
+                user.email = form['email']
+                user.name = form['name']
+                user.phone = form['phone']
+                user.state = form['state']
+                user.zipcode = form['zipcode']
+                user.address = form['address']
+                user.save()
+
+                data = set_session(request, request.session['user_name'], request.session['password'], TRUE)
+
+                print("data", data)
+
+                success = "Data has been updated successfully."
+                # return errors and success messages
+
+            print("Username", request.session['user_name'])
+            print("Password", request.session['password'])
+
+            
+            return render(request, 'user-profile.html', {
+                "data": data,
+                "errors": errors,
+                "success": success
+            })
+
+            
+
+
+
 def set_session(request, username, password, user=True):
-    request.session['is_logged_in'] = True
     data = {}
     request.session['is_logged_in'] = True
     if(user == True):
         data = User.objects.filter(username = username, password= password).values().first()
+        request.session['is_service_provider'] = 0
     else: 
         data = Business.objects.filter(username = username, password= password).values().first()
+        request.session['is_service_provider'] = 1
 
+    request.session['user_name'] = username
+    request.session['password'] = password
     request.session['user'] = data
     return data
 

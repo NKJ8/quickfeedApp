@@ -14,6 +14,7 @@ urlpatterns = [
     path('signupbusiness', views.signupbusiness, name='signup-page-business'),
     path('old', views.homepageold, name='oldhome'),
     path('logout-user', views.logout, name='logout-user'),
+    path('user-profile-update', views.update_user_profile, name='update-user-profile'),
     path('profile', views.profile, name='profile-page'),
     
     path('forgot-password', views.forgot_password, name='forgot-password-page'),

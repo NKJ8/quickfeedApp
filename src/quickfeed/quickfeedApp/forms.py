@@ -134,3 +134,31 @@ class ForgotPwdForm(forms.Form):
         'required': "Password is required",
         'max_length': "Please enter a shorter password"
     }, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}))
+
+
+class UpdateProfileForm(forms.Form):
+
+    email = forms.EmailField(label='Email address', required=True,error_messages={
+        'required': "Email is required",
+        'max_length': "Please enter a shorter email"
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    name = forms.CharField(label='Full Name', required=True, error_messages={
+        'required': "Full Name is required",
+       
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+    
+    dob = forms.DateField(label='Date of Birth', required=True, error_messages={
+        'required': "Date of Birth is required",
+       
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    address = forms.CharField(label='Address', required=True, error_messages={
+        'required': "Address is required",
+        
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+
+    phone = forms.IntegerField(label='Phone Number', required=True, error_messages={
+        'required': "Phone Number is required",
+        
+    }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
