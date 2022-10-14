@@ -12,3 +12,26 @@ Production Server:
 
     Password: 
         bW7cSj3PcZnOzpU;;t-tyIb6D9NjW72?
+
+
+So the fields that will be coming on Services list are:
+    1. Service name
+    2. Service Picture
+    3. Min Max Price
+    4. Provider name
+
+Inside a particular service details:
+    1. Description of service.
+    2. Price
+    3. Provider details
+    4. Reviews
+    5. Ratings
+    6. Pictures of service
+
+Inside a particular service provider details:
+    1. Basic details of SP(service provider)
+    2. Ratings
+    3. Reviews
+    4. Services provided
+
+        

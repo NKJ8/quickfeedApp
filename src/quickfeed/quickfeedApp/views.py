@@ -157,10 +157,34 @@ def profile(request):
     })
 
 def service_details(request, service):
-    print("service", service)
-    data = request.session['user']
+
+    data = {
+        1 : {
+           "name":  "Auto Repair",
+           "images": ["https://dcba.lacounty.gov/wp-content/uploads/2017/10/CarRepairs.jpg", "https://www.thurstontalk.com/wp-content/uploads/2019/11/Boss-Auto-Repair-in-Olympia-Four-Wheel-Drive-Repair.jpg", "https://www.aaa.com/AAA/common/AAR/images/aar-main-image.jpg", "https://creditkarma-cms.imgix.net/wp-content/uploads/2019/04/auto-repair-financing_1010055706.jpg", "https://lensautomotive.com/wp-content/uploads/sites/309/2016/09/slider-blue.jpg"],
+           "ratings": "0 ratings",
+           "reviews": "0 reviews",
+           "price": "200",
+           "description": "Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.",
+           "tags": "",
+           "business": "akshayb789"
+        },
+        2 : {
+           "name":  "Plumbing",
+           "images": "https://www.nutraingredients-usa.com/var/wrbm_gb_food_pharma/storage/images/9/4/5/8/218549-6-eng-GB/Akay-Flavours-Aromatics-Pvt.-Ltd2.jpg",
+           "ratings": "0 ratings",
+           "reviews": "0 reviews",
+           "price": "200",
+           "description": "Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.",
+           "tags": ""
+        }
+    }
+
+    print("---------------------------------------------------------service", data[1]['images'][0])
+    # return
+    user = request.session['user']
     return render(request, 'service-details.html', {
-        "data": data
+        "details": data[1]
     })
 
 
