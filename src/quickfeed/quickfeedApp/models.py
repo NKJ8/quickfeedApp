@@ -56,9 +56,9 @@ class Business(models.Model):
     state = models.CharField(max_length=100, null=True)
     zipcode = models.CharField(max_length=100, null=True)
     is_open = models.BooleanField(max_length=100, null=True)
-    descriptions = models.CharField(max_length=1000, null=True)
+    description = models.CharField(max_length=1000, null=True)
     review_count = models.CharField(max_length=100, null=True)
-    service_id = models.ForeignKey(Service, related_name='card_details', on_delete=models.SET_NULL, null=True)
+    # service_id = models.ForeignKey(Service, related_name='card_details', on_delete=models.SET_NULL, null=True)
     subscription_id = models.ForeignKey(Subscription, related_name='business', on_delete=models.SET_NULL, null=True)
 
     def __str__(self) -> str:

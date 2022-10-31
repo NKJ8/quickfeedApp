@@ -100,21 +100,65 @@
                         </div> 
                     </div>
                 </div>
+                <br>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
+                        
+                        <div class="d-flex justify-content-between align-items-center experience">
+                            <h4 class="text-right">Description of business/service</h4>
+                        </div>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="6">{{ data.description }}</textarea>
                     </div>
-                    <div class="col-md-9">
-                        <hr>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="container">
+                        
+                        <div class="d-flex justify-content-between align-items-center experience">
+                            <h4 class="text-right">Pricing and Timing Details</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-6">
+                                <label class="labels">Price</label>
+                                <input type="text" class="form-control" placeholder="Price" value="{{ data.price }}">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-6">
+                                <label class="labels">Time</label>
+                                <input type="text" class="form-control" placeholder="Time" value="{{ data.time_required }}">
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="d-flex justify-content-between align-items-center experience">
+                            <h4 class="text-right">Images</h4>
+                        </div>
+                        <input type="file" class="form-control" name="image1">
+                        <input type="file" class="form-control" name="image2">
+                        <input type="file" class="form-control" name="image3">
+                        <input type="file" class="form-control" name="image4">
+                        <input type="file" class="form-control" name="image5">
+                        <input type="file" class="form-control" name="image6">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        
                         <div class="d-flex justify-content-between align-items-center experience">
                             <h4 class="text-right">Subscription Details</h4>
-                            {% comment %} <span class="border px-3 p-1 add-experience">
-                                <i class="fa fa-plus"></i>&nbsp;Update</span> {% endcomment %}
                         </div>
                         <label class="labels">Subscription ID</label>
                         <input type="text" class="form-control" placeholder="Subscription Id" value="{{ data.subscription_id_id }}">
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Update Profile</button></div>
                     </div>
                 </div>
+
+
             </div>
         </form>
     </div>

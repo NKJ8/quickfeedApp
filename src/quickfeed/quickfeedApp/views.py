@@ -34,7 +34,9 @@ def login(request):
             else:
                 data['user'] = User.objects.filter(username = form.cleaned_data['username'], password= form.cleaned_data['password']).values().first()
 
-            # pprint({"Form": form.cleaned_data, "data": data})
+            pprint({"Form": form.cleaned_data, "data": data})
+
+            # return
             if('user' in data.keys() and data['user'] != None):
                 # get user data and send on profile page
                 data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'])
@@ -152,6 +154,13 @@ def logout(request):
 
 def profile(request):
     data = request.session['user']
+    
+    if(request.session['is_service_provider'] == 1) :
+        return render(request, 'business-profile.html', {
+            "data": data
+        })
+    
+
     return render(request, 'user-profile.html', {
         "data": data
     })
@@ -182,7 +191,7 @@ def service_details(request, service):
 
     print("---------------------------------------------------------service", data[1]['images'][0])
     # return
-    user = request.session['user']
+    # user = request.session['user']
     return render(request, 'service-details.html', {
         "details": data[1]
     })
@@ -285,6 +294,9 @@ def update_business_profile(request):
 
             if(form['address'].strip() == ""):
                 errors['address'] = "Address is required"
+                
+            if(form['description'].strip() == ""):
+                errors['description'] = "Description is required"
             
 
             print("Errors", errors)
@@ -304,6 +316,7 @@ def update_business_profile(request):
                 user.zipcode = form['zipcode']
                 user.city = form['city']
                 user.address = form['address']
+                user.description = form['description']
                 user.save()
 
                 success = "Data has been updated successfully."

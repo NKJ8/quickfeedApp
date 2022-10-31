@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('state', models.CharField(max_length=100, null=True)),
                 ('zipcode', models.CharField(max_length=100, null=True)),
                 ('is_open', models.BooleanField(max_length=100, null=True)),
-                ('descriptions', models.CharField(max_length=1000, null=True)),
+                ('description', models.CharField(max_length=1000, null=True)),
                 ('review_count', models.CharField(max_length=100, null=True)),
             ],
         ),
