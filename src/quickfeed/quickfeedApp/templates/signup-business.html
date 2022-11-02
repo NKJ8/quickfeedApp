@@ -13,7 +13,7 @@
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form action="signupbusiness" method="POST">                
+                <form action="signupbusiness" method="POST" enctype="multipart/form-data">                
                     {% csrf_token %}
                     <div class="divider d-flex align-items-center my-4 justify-content-center">
                         <p class="lead fw-normal mb-0 me-3">Business User Signup</p>

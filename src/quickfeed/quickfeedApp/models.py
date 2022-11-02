@@ -1,5 +1,6 @@
 
 from pyexpat import model
+from sre_constants import CATEGORY_UNI_DIGIT
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -23,9 +24,9 @@ class User(models.Model):
     name = models.CharField(max_length=100, null=True)
     email = models.CharField(max_length=100, null=True)
     address = models.CharField(max_length=200, null=True)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zipcode = models.CharField(max_length=100)
+    city = models.CharField(max_length=100, null=True)
+    state = models.CharField(max_length=100,null=True)
+    zipcode = models.CharField(max_length=100,null=True)
     username = models.CharField(max_length=100, null=True)
     password = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=100, null=True)
@@ -60,10 +61,20 @@ class Business(models.Model):
     review_count = models.CharField(max_length=100, null=True)
     # service_id = models.ForeignKey(Service, related_name='card_details', on_delete=models.SET_NULL, null=True)
     subscription_id = models.ForeignKey(Subscription, related_name='business', on_delete=models.SET_NULL, null=True)
+    image1 = models.ImageField(null=True,blank=True,upload_to="images/")
+    category_id = models.CharField(max_length=100, null=True)
+    price = models.CharField(max_length=100, null=True)
+    time = models.CharField(max_length=100, null=True)
+    image2 = models.ImageField(null=True,blank=True,upload_to="images/")
+    image3 = models.ImageField(null=True,blank=True,upload_to="images/")
+    image4 = models.ImageField(null=True,blank=True,upload_to="images/")
+    image5 = models.ImageField(null=True,blank=True,upload_to="images/")
+    image6 = models.ImageField(null=True,blank=True,upload_to="images/")
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
-
+        #return f"{self.first_name} {self.last_name}"
+        return self.name
+    
 class CardDetails(models.Model):
     card_number = models.CharField(max_length=20)
     card_exp_month = models.CharField(max_length=2)

@@ -10,23 +10,36 @@
     <link rel="stylesheet" href="{% static 'blog/post.css' %}"></link>
 {% endblock 'page-styles' %} {% endcomment %}
 
+
+
 {% block 'page-content' %}
-    <section class="hero">
+    
+
+
+<section class="hero">
         <div class="px-4 py-5 my-5 text-center">
             {% comment %} <img class="d-block mx-auto mb-4" src="{% static  %}" alt="" width="72" height="57"> {% endcomment %}
             <h1 class="display-5 fw-bold text-primary">QuickFeed</h1>
+            
             <div class="col-lg-6 mx-auto">
-              <p class="lead mb-4">Search for a service at your doorstep.</p>
-              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <div class="form-outline w-100">
-                    <input id="search-focus" type="search" id="form1" class="form-control text-center" placeholder="search for categories..."/>
-                    {% comment %} <label class="form-label" for="form1">Search</label> {% endcomment %}
-                </div>
-                <button type="button" class="btn btn-primary btn-sm pl-3 pr-3"><i class="fa fa-search"></i></button>
-              </div>
+              <p class="lead mb-4">Search for a service at your doorstep.</p>      
+                <form method=POST action="{%url 'search-page' %}">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <div class="form-outline w-100">
+                            <input id="search-focus" type="text" name="searched" id="form1" class="form-control text-center" placeholder="search for Business..."/>
+                            {% comment %} <label class="form-label" for="form1">Search</label> {% endcomment %}
+                        </div>
+                        <button type="submit" value="" name="search" class="btn btn-primary btn-sm pl-3 pr-3"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
+
+  
+  
+
     <section class="discover">
         <div class="container-fluid">
             <div class="row">

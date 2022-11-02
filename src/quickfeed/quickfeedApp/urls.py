@@ -17,10 +17,10 @@ urlpatterns = [
     path('user-profile-update', views.update_user_profile, name='update-user-profile'),
     path('business-profile-update', views.update_business_profile, name='update-business-profile'),
     path('service-details/<int:service>', views.service_details, name='service-details'),
-
-    path('profile', views.profile, name='profile-page'),
-    
+    path('service-details/<int:service>', views.service_details, name='service-details'),
+    path('search', views.search, name='search-page'),
     path('forgot-password', views.forgot_password, name='forgot-password-page'),
+    path('profile',views.profile, name='profile-page'),
     # path('thank-you', views.)
     # re_path(r'^login/$', views.login,  name='login-page'),
     #re_path(r'^logout/$', views.logout, name='logout'),

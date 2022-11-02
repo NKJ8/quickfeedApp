@@ -19,7 +19,7 @@
                 {{ success }}
             </div>
         {% endif %} 
-        <form action="business-profile-update" method="post">
+        <form action="business-profile-update" method="post" enctype="multipart/form-data" >
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-3 border-right">
@@ -136,13 +136,22 @@
                         
                         <div class="d-flex justify-content-between align-items-center experience">
                             <h4 class="text-right">Images</h4>
+                            <img src="{{ data.image1.url }}" class="img-fluid"/>
+                            <img src="{{ data.image2.url }}" class="img-fluid"/>
+                            <img src="{{ data.image3.url }}" class="img-fluid"/>
+                            <img src="{{ data.image4.url }}" class="img-fluid"/>
+                            <img src="{{ data.image5.url }}" class="img-fluid"/>
+                            <img src="{{ data.image6.url }}" class="img-fluid"/> 
+                            
                         </div>
-                        <input type="file" class="form-control" name="image1">
+
+                      
+                        {% comment %} <input type="file" class="form-control" name="image1">
                         <input type="file" class="form-control" name="image2">
                         <input type="file" class="form-control" name="image3">
                         <input type="file" class="form-control" name="image4">
                         <input type="file" class="form-control" name="image5">
-                        <input type="file" class="form-control" name="image6">
+                        <input type="file" class="form-control" name="image6"> {% endcomment %}
                     </div>
                 </div>
                 <br>

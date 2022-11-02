@@ -9,6 +9,10 @@ from .models import User, Business
 from pprint import pprint
 
 
+
+
+
+
 # Create your views here.
 # request handler
 # Action
@@ -35,7 +39,8 @@ def login(request):
                 data['user'] = User.objects.filter(username = form.cleaned_data['username'], password= form.cleaned_data['password']).values().first()
 
             pprint({"Form": form.cleaned_data, "data": data})
-
+            #print("----",form.keys)
+           
             # return
             if('user' in data.keys() and data['user'] != None):
                 # get user data and send on profile page
@@ -49,11 +54,12 @@ def login(request):
                 # get user data and send on profile page
                 data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'], False)
 
-                # request.session['email'] = email
+                #request.session['email'] = email
                 return render(request, 'business-profile.html', {
                     "data": data,
                     "form": UpdateProfileForm()
                 })
+                return HttpResponse(request.POST.items())
 
             else:
                 form.add_error('username', "Please check your login details.")
@@ -104,7 +110,7 @@ def signup(request):
 
 def signupbusiness(request):
     if request.method == 'POST':
-        form = SignUpFormBusiness(request.POST)
+        form = SignUpFormBusiness(request.POST,request.FILES)
 
         if(form.is_valid() and (form.cleaned_data['password'] == form.cleaned_data['cnf_password'])):
             if(form.is_valid() and not(Business.objects.filter(username = form.cleaned_data['username']).exists())):
@@ -118,8 +124,14 @@ def signupbusiness(request):
                         state = form.cleaned_data['state'],
                         zipcode = form.cleaned_data['zipcode'],
                         password = form.cleaned_data['password'],
-                        name = form.cleaned_data['name']
-                    )
+                        name = form.cleaned_data['name'],
+                        image1 = form.cleaned_data['image1'],
+                        image2 = form.cleaned_data['image2'],
+                        image3 = form.cleaned_data['image3'],
+                        image4 = form.cleaned_data['image4'],
+                        image5 = form.cleaned_data['image5'],
+                        image6 = form.cleaned_data['image6'],
+                        )
                     business.save()
 
                     data = set_session(request, form.cleaned_data['username'], form.cleaned_data['password'], False)
@@ -317,6 +329,7 @@ def update_business_profile(request):
                 user.city = form['city']
                 user.address = form['address']
                 user.description = form['description']
+               # user.image1 = form['image1']
                 user.save()
 
                 success = "Data has been updated successfully."
@@ -392,3 +405,11 @@ def forgot_password(request):
         "form": form,
         "title": "Forgot Password - Quickfeed"
     })
+    
+def search(request):
+    if request.method == "POST":
+        searched = request.POST.get('searched')
+        business = Business.objects.filter(name__contains=searched)
+        return render(request,'search.html',{'searched':searched,'business':business})
+    else:
+        return render(request,'search.html')

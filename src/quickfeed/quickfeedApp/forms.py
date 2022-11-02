@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import validate_email
 # from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import Business, User
 
 class SignUpForm(forms.Form):
 
@@ -108,6 +108,32 @@ class SignUpFormBusiness(forms.Form):
     zipcode = forms.CharField(label='Zip code', required=True, error_messages={
         'required': "Zip code is required",
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+    
+
+    image1 = forms.ImageField(label='Upload Image', required=False, error_messages={
+         'required': "Image is required"}
+     )
+    
+    image2 = forms.ImageField(label='Upload Image', required=True, error_messages={
+        'required': "Image is required",
+    })
+     
+    image3 = forms.ImageField(label='Upload Image', required=True, error_messages={
+        'required': "Image is required",
+    })
+      
+    image4 = forms.ImageField(label='Upload Image', required=True, error_messages={
+        'required': "Image is required",
+    })
+     
+    image5 = forms.ImageField(label='Upload Image', required=True, error_messages={
+        'required': "Image is required",
+    })
+      
+    image6 = forms.ImageField(label='Upload Image', required=True, error_messages={
+        'required': "Image is required",
+    })
+
 
     # is_open = forms.BooleanField(label='Is Open', required=True, error_messages={
     #     'required': "Is Open is required",
@@ -162,3 +188,5 @@ class UpdateProfileForm(forms.Form):
         'required': "Phone Number is required",
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
+    
+    
