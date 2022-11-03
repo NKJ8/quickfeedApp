@@ -19,7 +19,10 @@ from pprint import pprint
 
 
 def homepage(request):
-    return render(request, "index.html", {"title": "Welcome to quickfeed"})
+
+    # getting all the businesses
+    business = Business.objects.all().values()
+    return render(request, "index.html", {"title": "Welcome to quickfeed", 'business': business})
 
 def about_us(request):
     return render(request, "about-us.html", {"title": "About Us - Quickfeed"})
