@@ -410,6 +410,21 @@ def search(request):
     if request.method == "POST":
         searched = request.POST.get('searched')
         business = Business.objects.filter(name__contains=searched)
-        return render(request,'search.html',{'searched':searched,'business':business})
+        if not business:
+            return render(request,'search_not_found.html',{'searched':searched,'business':business})
+        else:
+            return render(request,'search.html',{'searched':searched,'business':business})
     else:
         return render(request,'search.html')
+    
+    
+def service_details(request):
+    if request.method == "POST":
+        searched = request.POST.get('Cat_val')
+        business = Business.objects.filter(category_id__contains=searched).order_by('-review_count')
+        if not business:
+            return render(request,'search_not_found.html',{'searched':searched,'business':business})
+        else:
+            return render(request,'search_cat.html',{'searched':searched,'business':business})
+    else:
+        return render(request,'search.html')    
