@@ -131,70 +131,26 @@
                 <div class="col-md-12">
                     <div class="row p-5 bg-light border rounded-3">
                         <h1>Top Service Providers!</h1>
-                        <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/Resturant.PNG" %}" alt="home"/>
-                            <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
+                        {% for b in business %}
+                            <div class="card m-4" style="width: 16rem;">
+                                {% if b.image1 %}
+                                    <img class="card-img-top h-75" src="{{ b.image1 }}" alt="home"/>
+                                {% endif %}
+                                <div class="card-body text-center">
+                                {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
+                                {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
+                                <a href="#" class="btn btn-primary ">{{ b.name }}</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/hotels.PNG" %}" alt="home"/>
-                            <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
-                            </div>
-                        </div>
-                        <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/lcok.PNG" %}" alt="home"/>
-                            <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
-                            </div>
-                        </div>
-                        <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/dryclean.PNG" %}" alt="home"/>
-                            <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
-                            </div>
-                        </div>
-                        <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/meuseums.PNG" %}" alt="home"/>
-                            <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
-                            </div>
-                        </div>
-                        <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/bars.PNG" %}" alt="home"/>
-                            <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
-                            </div>
-                        </div>
-                        <div class="card m-4" style="width: 16rem;">
-                            <img class="card-img-top h-75" src="{% static "quickfeed/images/Bakery.PNG" %}" alt="home"/>
-                            <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                            <a href="#" class="btn btn-primary ">Category Name</a>
-                            </div>
-                        </div>
-                        <div class="card m-4" style="width: 16rem;">
+                        {% endfor %}
+                        {% comment %} <div class="card m-4" style="width: 16rem;">
                             <img class="card-img-top h-75" src="{% static "quickfeed/images/cafe.PNG" %}" alt="home"/>
                             <div class="card-body text-center">
-                            {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
-                            {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
+                            <h5 class="card-title">Category Title</h5>
+                            <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
                             <a href="#" class="btn btn-primary ">Category Name</a>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </div>
             </div>
