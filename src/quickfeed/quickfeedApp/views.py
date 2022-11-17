@@ -21,7 +21,7 @@ from pprint import pprint
 def homepage(request):
 
     # getting all the businesses
-    business = Business.objects.all().values()
+    business = Business.objects.order_by('review_count').values().reverse()[:5]
     return render(request, "index.html", {"title": "Welcome to quickfeed", 'business': business})
 
 def about_us(request):

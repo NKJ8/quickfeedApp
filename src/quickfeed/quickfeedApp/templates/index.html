@@ -155,7 +155,7 @@
                 {% comment %} Discover section {% endcomment %}
                 <div class="col-md-12">
                     <div class="row p-5 bg-light border rounded-3">
-                        <h1>Top Service Providers!</h1>
+                        <h1>Top Service Providers By Ratings !</h1>
                         {% for b in business %}
                             <div class="card m-4" style="width: 16rem;">
                                 {% if b.image1 %}
@@ -164,6 +164,7 @@
                                 <div class="card-body text-center">
                                 {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
                                 {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
+                                <p>Ratings: {{b.review_count}}</p>
                                 <a href="#" class="btn btn-primary ">{{ b.name }}</a>
                                 </div>
                             </div>
