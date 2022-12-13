@@ -189,4 +189,18 @@ class UpdateProfileForm(forms.Form):
         
     }, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
     
+
+review_star =[  (1,1),
+        (2,2),
+        (3,3),
+        (4,4),
+        (5,5)]
+
+class reviewForm(forms.Form):
     
+    review = forms.CharField(label='Review', required=False, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg','required' :'True'}))
+    
+    rate = forms.CharField(label='Select your rating', required=False,  widget=forms.Select(choices=review_star))
+    
+    
+

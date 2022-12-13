@@ -1,14 +1,15 @@
 from pickle import FALSE, TRUE
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login, authenticate
-from .forms import ForgotPwdForm, LoginForm, SignUpForm, SignUpFormBusiness, UpdateProfileForm
+from .forms import ForgotPwdForm, LoginForm, SignUpForm, SignUpFormBusiness, UpdateProfileForm, reviewForm
 from django.http import HttpResponse, HttpResponseRedirect
 import re
-from .models import User, Business
+from .models import User, Business, Reviews
 
 from pprint import pprint
-
-
+from datetime import date
+from django.contrib import messages
+from django.db.models import Avg
 
 
 
@@ -43,7 +44,7 @@ def login(request):
 
             pprint({"Form": form.cleaned_data, "data": data})
             #print("----",form.keys)
-           
+            print(data)
             # return
             if('user' in data.keys() and data['user'] != None):
                 # get user data and send on profile page
@@ -360,10 +361,11 @@ def set_session(request, username, password, user=True):
     else: 
         data = Business.objects.filter(username = username, password= password).values().first()
         request.session['is_service_provider'] = 1
-
+    print(data)
     request.session['user_name'] = username
     request.session['password'] = password
     request.session['user'] = data
+    request.session['id'] = data['id']
     return data
 
 def forgot_password(request):
@@ -413,10 +415,12 @@ def search(request):
     if request.method == "POST":
         searched = request.POST.get('searched')
         business = Business.objects.filter(name__contains=searched)
+        form = reviewForm(request.POST or None)
+        
         if not business:
             return render(request,'search_not_found.html',{'searched':searched,'business':business})
         else:
-            return render(request,'search.html',{'searched':searched,'business':business})
+            return render(request,'search.html',{'searched':searched,'business':business,"form": form})
     else:
         return render(request,'search.html')
     
@@ -431,3 +435,55 @@ def service_details(request):
             return render(request,'search_cat.html',{'searched':searched,'business':business})
     else:
         return render(request,'search.html')    
+    
+    
+    
+def review(request):
+    
+    if request.method == 'POST':
+        
+        form = reviewForm(request.POST or None)
+        if(form.is_valid()):
+                    
+                    #user_id = login.objects.get(id=uid)
+                   
+                    review = Reviews(
+                        review = form.cleaned_data['review'],
+                        ratings = form.cleaned_data['rate'],
+                        date = date.today(),
+                        business_id_id = request.POST.get('submit'),
+                        user_id_id = request.session['id']
+                        )
+                       
+                      
+                    review.save()
+        return render(request,'review_finish.html')
+        
+    else:
+        return render(request, 'search.html',{
+        "form": form})            
+    
+def details(request):
+    
+    if request.method == 'POST':
+        
+        detail = request.POST.get('detail')
+        review = Reviews.objects.filter(business_id=detail)
+        business = Business.objects.filter(id=detail)
+        agg = Reviews.objects.filter(business_id=detail).aggregate(Avg('ratings'))
+        print(agg)
+        avgg = agg['ratings__avg']
+        avgg = round(avgg)
+        
+        list = []
+        for i in range(0,avgg):
+            list.append(i)
+            
+        
+        if not review:
+            return render(request,'search_not_found.html',{'searched':detail,'business':business})
+        else:
+            return render(request,'details.html',{'searched':detail,'business':business,'review':review,'list':list,'avg':avgg})
+    else:
+        return render(request,'search.html')
+    

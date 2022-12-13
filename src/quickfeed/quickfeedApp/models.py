@@ -81,12 +81,15 @@ class CardDetails(models.Model):
     card_exp_year = models.CharField(max_length=4)
     user_id = models.ForeignKey(User, related_name='card_details', on_delete=models.SET_NULL, null=True)
 
+rt = ((1,1),(2,2),(3,3),(4,4),(5,5))
+
 class Reviews(models.Model):
     review = models.CharField(max_length=20)
     user_id = models.ForeignKey(User, related_name='users', on_delete=models.SET_NULL, null=True)
     business_id = models.ForeignKey(Business, related_name='reviews', on_delete=models.SET_NULL, null=True)
     anonymous = models.BooleanField(default=False)
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=None)
+    ratings = models.IntegerField(choices=rt)
 
 class Profile(models.Model):
     business_id = models.ForeignKey(Business, related_name='profile', on_delete=models.SET_NULL, null=True)

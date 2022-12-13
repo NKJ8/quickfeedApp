@@ -10,8 +10,8 @@
     
     
     {% if searched %}
-        <h1> Your Search Result For {{ searched }} </h1>
-        <br/>
+        {% comment %} <h1> Your Search Result For {{ searched }} </h1>
+        <br/> {% endcomment %}
         {% for b in business %}
             
               <div class="container rounded bg-white mt-5 mb-5 d-flex flex-column">
@@ -37,12 +37,11 @@
                                     <h3 class="product-title">{{ b }}</h3>
                                     <div class="rating">
                                         <div class="stars">
+                                            {% for item in list %}
                                             <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
+                                            {% endfor %}
                                         </div>
+                                       <p> {{ avg }} Stars </p>
                                         <span class="review-no">{{ details.reviews }}</span>
                                     </div>
                                     <p >{{ b.description }}.</p>
@@ -59,14 +58,13 @@
                                         <span class="color green"></span>
                                         <span class="color blue"></span>
                                     </h5> {% endcomment %}
-                                    <div class="action">
+                                    {% comment %} <div class="action">
                                         <form action="details" method="POST">                
                                             {% csrf_token %}
-                                        <button class="add-to-cart btn btn-default" type="submit" name= "detail" value= "{{ b.id }}" >More Details</button>
+                                        <button class="add-to-cart btn btn-default" type="button" name= "detail" value= "{{ b.id }}" >More Details</button>
                                         </form>
-                                       
                                         {% comment %} <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> {% endcomment %}
-                                    </div>
+                                    {% comment %} </div>
                                     <div>
                                         </br>
                                         
@@ -91,12 +89,42 @@
                                                         style="padding-left: 2.5rem; padding-right: 2.5rem;" value= "{{ b.id }}" >Add Review</button>
                                                     
                                                 </div>
-                                            </form>
+                                            </form> {% endcomment %} 
 
                                           </div>
                                     </div>
                                 </div>
+
+                                <div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Rewiews</th>
+                                            <th scope="col"> Rating(1-5)</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">User</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in review %}
+                                          <tr>
+                                            
+                                            <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">{{ item.review }}</td>
+                                            <td>{{ item.ratings }}</td>
+                                            <td>{{ item.date }}</td>
+                                            <td>{{ item.user_id }}</td>
+                                          </tr>
+                                          {% endfor %}
+                                        </tbody>
+                                      </table>
+
+
+
+                                </div>
+
                             </div>
+                           
+                        
                         </div>
                     </div>
                 </div>
