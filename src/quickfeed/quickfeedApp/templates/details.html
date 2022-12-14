@@ -37,13 +37,25 @@
                                     <h3 class="product-title">{{ b }}</h3>
                                     <div class="rating">
                                         <div class="stars">
-                                            {% for item in list %}
+                                            {% with  b.avg_rate|floatformat:0|add:0 as avgs %}
+                                            {% if b.avg_rate == None %}
+                                            N/A Average Rating
+                                            {% else %}
+                                            {% load my_filters %}
+                                            {% for i in avgs|times %}
                                             <span class="fa fa-star"></span>
-                                            {% endfor %}
+                                            {% endfor %} 
+                                            </br>
+                                            Average Rating
+                                            {% comment %} <h2>{{ b.avg_rate|floatformat:0 }}</h2>Average Rating {% endcomment %}
+                                            {% endif %}
+                                            {% endwith %}
                                         </div>
-                                       <p> {{ avg }} Stars </p>
-                                        <span class="review-no">{{ details.reviews }}</span>
+                                       {% comment %} <p> {{ avg }} Stars </p> {% endcomment %}
+                                        {% comment %} <span class="review-no">{{ details.reviews }}</span> {% endcomment %}
                                     </div>
+                                    <br>
+
                                     <p >{{ b.description }}.</p>
                                     <p ><strong>Phone</strong>: {{ b.phone }}</p>
                                     <p class="vote"><strong>Address: </strong> {{ b.address }}, {{ b.city }}, {{ b.state }}</p>
@@ -112,7 +124,7 @@
                                             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">{{ item.review }}</td>
                                             <td>{{ item.ratings }}</td>
                                             <td>{{ item.date }}</td>
-                                            <td>{{ item.user_id }}</td>
+                                            <td>{{ item.user_id.name }}</td>
                                           </tr>
                                           {% endfor %}
                                         </tbody>

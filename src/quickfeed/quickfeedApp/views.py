@@ -11,7 +11,9 @@ from datetime import date
 from django.contrib import messages
 from django.db.models import Avg
 
+import operator
 
+from django.db import connection
 
 
 # Create your views here.
@@ -22,7 +24,11 @@ from django.db.models import Avg
 def homepage(request):
 
     # getting all the businesses
-    business = Business.objects.all().values()
+    business = Business.objects.annotate(review_count1=Avg('reviews__ratings')).order_by('-review_count1')[:8]
+
+    #business = Business.objects.select_related('business_id').all()
+    # b = sorted(business, key=operator.attrgetter('last_name'))
+    # business = Business.objects.all().values().order_by('avg_rate')
     return render(request, "index.html", {"title": "Welcome to quickfeed", 'business': business})
 
 def about_us(request):
@@ -181,36 +187,41 @@ def profile(request):
         "data": data
     })
 
-def service_details(request, service):
+def service_details(request):
+    if request.method == "POST":
+        searched = request.POST.get('Cat_val')
+        print(searched)
+    form = reviewForm(request.POST or None)
+    business = Business.objects.filter(category_id=searched)
+    return render(request,'search.html',{'searched':searched,'business':business,"form": form})
+    # data = {
+    #     1 : {
+    #        "name":  "Auto Repair",
+    #        "images": ["https://dcba.lacounty.gov/wp-content/uploads/2017/10/CarRepairs.jpg", "https://www.thurstontalk.com/wp-content/uploads/2019/11/Boss-Auto-Repair-in-Olympia-Four-Wheel-Drive-Repair.jpg", "https://www.aaa.com/AAA/common/AAR/images/aar-main-image.jpg", "https://creditkarma-cms.imgix.net/wp-content/uploads/2019/04/auto-repair-financing_1010055706.jpg", "https://lensautomotive.com/wp-content/uploads/sites/309/2016/09/slider-blue.jpg"],
+    #        "ratings": "0 ratings",
+    #        "reviews": "0 reviews",
+    #        "price": "200",
+    #        "description": "Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.",
+    #        "tags": "",
+    #        "business": "akshayb789"
+    #     },
+    #     2 : {
+    #        "name":  "Plumbing",
+    #        "images": "https://www.nutraingredients-usa.com/var/wrbm_gb_food_pharma/storage/images/9/4/5/8/218549-6-eng-GB/Akay-Flavours-Aromatics-Pvt.-Ltd2.jpg",
+    #        "ratings": "0 ratings",
+    #        "reviews": "0 reviews",
+    #        "price": "200",
+    #        "description": "Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.",
+    #        "tags": ""
+    #     }
+    # }
 
-    data = {
-        1 : {
-           "name":  "Auto Repair",
-           "images": ["https://dcba.lacounty.gov/wp-content/uploads/2017/10/CarRepairs.jpg", "https://www.thurstontalk.com/wp-content/uploads/2019/11/Boss-Auto-Repair-in-Olympia-Four-Wheel-Drive-Repair.jpg", "https://www.aaa.com/AAA/common/AAR/images/aar-main-image.jpg", "https://creditkarma-cms.imgix.net/wp-content/uploads/2019/04/auto-repair-financing_1010055706.jpg", "https://lensautomotive.com/wp-content/uploads/sites/309/2016/09/slider-blue.jpg"],
-           "ratings": "0 ratings",
-           "reviews": "0 reviews",
-           "price": "200",
-           "description": "Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.",
-           "tags": "",
-           "business": "akshayb789"
-        },
-        2 : {
-           "name":  "Plumbing",
-           "images": "https://www.nutraingredients-usa.com/var/wrbm_gb_food_pharma/storage/images/9/4/5/8/218549-6-eng-GB/Akay-Flavours-Aromatics-Pvt.-Ltd2.jpg",
-           "ratings": "0 ratings",
-           "reviews": "0 reviews",
-           "price": "200",
-           "description": "Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.",
-           "tags": ""
-        }
-    }
-
-    print("---------------------------------------------------------service", data[1]['images'][0])
-    # return
-    # user = request.session['user']
-    return render(request, 'service-details.html', {
-        "details": data[1]
-    })
+    # print("---------------------------------------------------------service", data[1]['images'][0])
+    # # return
+    # # user = request.session['user']
+    # return render(request, 'service-details.html', {
+    #     "details": data[1]
+    # })
 
 
 def update_user_profile(request):
@@ -414,8 +425,45 @@ def forgot_password(request):
 def search(request):
     if request.method == "POST":
         searched = request.POST.get('searched')
-        business = Business.objects.filter(name__contains=searched)
+        print(searched)
+        searched = searched.lower()
+        x = searched.split()
+        print(x)
+        for i in x:
+            if(i == 'mechanic'):
+                business = Business.objects.filter(category_id=i)
+                break
+            elif( i == 'plumber'):
+                business = Business.objects.filter(category_id=i)
+                break
+            elif( i == 'mover'):
+                business = Business.objects.filter(category_id=i)
+                break
+            elif( i == 'cleaner'):
+                business = Business.objects.filter(category_id__contains=i)
+                break
+            elif( i == 'saloon'):
+                business = Business.objects.filter(category_id=i)
+                break
+            elif( i == 'locksmith'):
+                business = Business.objects.filter(category_id=i)
+                break
+            elif( i == 'towing'):
+                business = Business.objects.filter(category_id=i)
+                break
+            elif( i == 'food'):
+                business = Business.objects.filter(category_id=i)
+                break
+            else:
+                business = Business.objects.filter(name__contains=i)
+                print(business)
+                if business:
+                    break
+            
+        print(business)
+       
         form = reviewForm(request.POST or None)
+        #averages = business.reviews_set.aggregate(Avg('ratings')).values()[0]
         
         if not business:
             return render(request,'search_not_found.html',{'searched':searched,'business':business})
@@ -425,16 +473,16 @@ def search(request):
         return render(request,'search.html')
     
     
-def service_details(request):
-    if request.method == "POST":
-        searched = request.POST.get('Cat_val')
-        business = Business.objects.filter(category_id__contains=searched).order_by('-review_count')
-        if not business:
-            return render(request,'search_not_found.html',{'searched':searched,'business':business})
-        else:
-            return render(request,'search_cat.html',{'searched':searched,'business':business})
-    else:
-        return render(request,'search.html')    
+# def service_details(request):
+#     if request.method == "POST":
+#         searched = request.POST.get('Cat_val')
+#         business = Business.objects.filter(category_id__contains=searched).order_by('-review_count')
+#         if not business:
+#             return render(request,'search_not_found.html',{'searched':searched,'business':business})
+#         else:
+#             return render(request,'search_cat.html',{'searched':searched,'business':business})
+#     else:
+#         return render(request,'search.html')    
     
     
     
@@ -444,15 +492,23 @@ def review(request):
         
         form = reviewForm(request.POST or None)
         if(form.is_valid()):
-                    
+                    print(request.session.keys())
                     #user_id = login.objects.get(id=uid)
-                   
-                    review = Reviews(
+                    if(request.session.keys()):
+                        review = Reviews(
                         review = form.cleaned_data['review'],
                         ratings = form.cleaned_data['rate'],
                         date = date.today(),
                         business_id_id = request.POST.get('submit'),
                         user_id_id = request.session['id']
+                        )
+                    else:
+                        review = Reviews(
+                        review = form.cleaned_data['review'],
+                        ratings = form.cleaned_data['rate'],
+                        date = date.today(),
+                        business_id_id = request.POST.get('submit'),
+                        anonymous = True
                         )
                        
                       
@@ -471,19 +527,21 @@ def details(request):
         review = Reviews.objects.filter(business_id=detail)
         business = Business.objects.filter(id=detail)
         agg = Reviews.objects.filter(business_id=detail).aggregate(Avg('ratings'))
-        print(agg)
-        avgg = agg['ratings__avg']
-        avgg = round(avgg)
+        print(detail)
+        # print(agg)
+        # #avgg = agg['ratings__avg']
+        # #avgg = round(avgg)
         
-        list = []
-        for i in range(0,avgg):
-            list.append(i)
+        
+        # list = []
+        # for i in range(0,avgg):
+        #     list.append(i)
             
         
-        if not review:
+        if not business:
             return render(request,'search_not_found.html',{'searched':detail,'business':business})
         else:
-            return render(request,'details.html',{'searched':detail,'business':business,'review':review,'list':list,'avg':avgg})
+            return render(request,'details.html',{'searched':detail,'business':business,'review':review})
     else:
         return render(request,'search.html')
     

@@ -3,7 +3,8 @@ from pyexpat import model
 from sre_constants import CATEGORY_UNI_DIGIT
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models import Avg
+from decimal import *
 
 # Create your models here.
 
@@ -58,7 +59,7 @@ class Business(models.Model):
     zipcode = models.CharField(max_length=100, null=True)
     is_open = models.BooleanField(max_length=100, null=True)
     description = models.CharField(max_length=1000, null=True)
-    review_count = models.CharField(max_length=100, null=True)
+    review_count = models.IntegerField(default=0)
     # service_id = models.ForeignKey(Service, related_name='card_details', on_delete=models.SET_NULL, null=True)
     subscription_id = models.ForeignKey(Subscription, related_name='business', on_delete=models.SET_NULL, null=True)
     image1 = models.ImageField(null=True,blank=True,upload_to="images/")
@@ -74,6 +75,10 @@ class Business(models.Model):
     def __str__(self) -> str:
         #return f"{self.first_name} {self.last_name}"
         return self.name
+    
+    @property
+    def avg_rate(self):
+        return self.reviews.aggregate(avg_score= Avg('ratings'))['avg_score']
     
 class CardDetails(models.Model):
     card_number = models.CharField(max_length=20)

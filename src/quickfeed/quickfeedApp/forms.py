@@ -198,7 +198,7 @@ review_star =[  (1,1),
 
 class reviewForm(forms.Form):
     
-    review = forms.CharField(label='Review', required=False, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg','required' :'True'}))
+    review = forms.CharField(label='Review', required=False, widget=forms.Textarea(attrs={'style': 'height:100px','class': 'form-control form-control-lg','required' :'True'}))
     
     rate = forms.CharField(label='Select your rating', required=False,  widget=forms.Select(choices=review_star))
     

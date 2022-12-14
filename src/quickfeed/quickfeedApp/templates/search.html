@@ -13,7 +13,7 @@
         <h1> Your Search Result For {{ searched }} </h1>
         <br/>
         {% for b in business %}
-            
+        
               <div class="container rounded bg-white mt-5 mb-5 d-flex flex-column">
                 <div class="container">
                     <div class="card">
@@ -23,6 +23,10 @@
                                     
                                     <div class="preview-pic tab-content">
                                     <div class="tab-pane active" id="pic-1"><img src="{{ b.image1.url }}" /></div>
+                                    <div class="tab-pane" id="pic-2"><img class="pop" src="{{ b.image3.url }}" /></div>
+						            <div class="tab-pane" id="pic-3"><img class="pop" src="{{ b.image3.url }}" /></div>
+						            <div class="tab-pane" id="pic-4"><img class="pop" src="{{ b.image3.url }}" /></div>
+						            <div class="tab-pane" id="pic-5"><img class="pop" src="{{ b.image3.url }}" /></div>
                                     </div>
                                     <ul class="preview-thumbnail nav nav-tabs">
                                     <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{ b.image2.url }}" /></a></li>
@@ -33,18 +37,33 @@
                                     </ul>
                                     
                                 </div>
+                              
                                 <div class="details col-md-6">
                                     <h3 class="product-title">{{ b }}</h3>
                                     <div class="rating">
                                         <div class="stars">
+                                            {% with  b.avg_rate|floatformat:0|add:0 as avgs %}
+                                            {% if b.avg_rate == None %}
+                                            N/A Average Rating
+                                            {% else %}
+                                            {% load my_filters %}
+                                            {% for i in avgs|times %}
+                                            <span class="fa fa-star"></span>
+                                            {% endfor %} 
+                                            </br>
+                                            Average Rating
+                                            {% comment %} <h2>{{ b.avg_rate|floatformat:0 }}</h2>Average Rating {% endcomment %}
+                                            {% endif %}
+                                            {% endwith %}
+                                            {% comment %} <span class="fa fa-star"></span>
+                                            
                                             <span class="fa fa-star"></span>
                                             <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span> {% endcomment %}
                                         </div>
                                         <span class="review-no">{{ details.reviews }}</span>
                                     </div>
+                                </br>
                                     <p >{{ b.description }}.</p>
                                     <p ><strong>Phone</strong>: {{ b.phone }}</p>
                                     <p class="vote"><strong>Address: </strong> {{ b.address }}, {{ b.city }}, {{ b.state }}</p>
@@ -76,15 +95,17 @@
                                             <form action="review" method="POST">                
                                                 {% csrf_token %}
                                                                                             
-                                                  <div class="mb-3">
+                                                <div  class="form-outline">
                                                     {% for field in form %}
-                                                        {{ field.label_tag }}
-                                                        {{ field }}
-                                                        {{ field.errors }}
-                                                  </br>
+                                                    {{ field.label_tag }}
+                                                    {{ field }}
+                                                    {{ field.errors }}
+                                                    </br>
                                                     {% endfor %}
-                                                  
-                                                 </div> 
+                                                    
+                                                   
+                                                   
+                                                </div> 
                                                                
                                                 <div class="text-center text-lg-start mt-4 pt-2">
                                                     <button type="submit" name= "submit" class="btn btn-primary btn-lg"
@@ -115,3 +136,7 @@
     {% endif %}
 
 {% endblock %}
+
+
+
+ 

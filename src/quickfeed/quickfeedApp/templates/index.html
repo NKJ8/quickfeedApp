@@ -54,9 +54,9 @@
                                 
                             <h5 class="card-title">Mechanic</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Mechanic"  class="btn btn-primary ">Mechanic</button>
+                                <button type="submit" name="Cat_val" value="mechanic"  class="btn btn-primary ">Mechanic</button>
                             </form>
                             </div>
                         </div>
@@ -66,9 +66,9 @@
                             <div class="card-body text-center">
                             <h5 class="card-title">Plumber</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Plumbing" class="btn btn-primary ">Plumbing</button>
+                                <button type="submit" name="Cat_val" value="plumbing" class="btn btn-primary ">Plumbing</button>
                             </form>
                             </div>
                         </div>
@@ -78,9 +78,9 @@
                             <div class="card-body text-center">
                             <h5 class="card-title">Movers</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Movers" class="btn btn-primary ">Movers</button>
+                                <button type="submit" name="Cat_val" value="movers" class="btn btn-primary ">Movers</button>
                             </form>
                             </div>
                         </div>
@@ -90,9 +90,9 @@
                             <div class="card-body text-center">
                             <h5 class="card-title">Home Cleaners</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Cleaners" class="btn btn-primary ">Cleaners</button>
+                                <button type="submit" name="Cat_val" value="cleaners" class="btn btn-primary ">Cleaners</button>
                             </form>
                             </div>
                         </div>
@@ -102,9 +102,9 @@
                             <div class="card-body text-center">
                             <h5 class="card-title">Dry Cleaners</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Dry Cleaners" class="btn btn-primary ">Dry Cleaners</button>
+                                <button type="submit" name="Cat_val" value="drycleaners" class="btn btn-primary ">Dry Cleaners</button>
                             </form>
                             </div>
                         </div>
@@ -114,9 +114,9 @@
                             <div class="card-body text-center">
                             <h5 class="card-title">Saloon</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Saloon" class="btn btn-primary ">Saloon</button>
+                                <button type="submit" name="Cat_val" value="saloon" class="btn btn-primary ">Saloon</button>
                             </form>
                             </div>
                         </div>
@@ -126,9 +126,9 @@
                             <div class="card-body text-center">
                             <h5 class="card-title">Locksmith</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Locksmith" class="btn btn-primary ">Locksmith</button>
+                                <button type="submit" name="Cat_val" value="locksmith" class="btn btn-primary ">Locksmith</button>
                             </form>
                             </div>
                         </div>
@@ -138,9 +138,9 @@
                             <div class="card-body text-center">
                             <h5 class="card-title">Towing</h5>
                             <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form method=POST action="{%url 'service-details' %}">
+                            <form action="service-details" method=POST >
                                 {% csrf_token %}
-                                <button type="submit" name="Cat_val" value="Towing" class="btn btn-primary ">Towing</button>
+                                <button type="submit" name="Cat_val" value="towing" class="btn btn-primary ">Towing</button>
                             </form>
                             </div>
                         </div>
@@ -156,18 +156,42 @@
                 <div class="col-md-12">
                     <div class="row p-5 bg-light border rounded-3">
                         <h1>Top Service Providers!</h1>
+                        
+                      
                         {% for b in business %}
+                            
                             <div class="card m-4" style="width: 16rem;">
                                 {% if b.image1 %}
                                     <img class="card-img-top h-75" src="{{ b.image1 }}" alt="home"/>
                                 {% endif %}
                                 <div class="card-body text-center">
-                                {% comment %} <h5 class="card-title">Category Title</h5> {% endcomment %}
+                                 <h5 class="card-title"></h5> 
+                                
+                                
                                 {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                                <a href="#" class="btn btn-primary ">{{ b.name }}</a>
+                                <form action="Top-service" method=POST >
+                                {% csrf_token %}
+                                {% with  b.avg_rate|floatformat:0|add:0 as avgs %}
+                                
+                                            {% if b.avg_rate == None %}
+                                                N/A
+                                            {% else %}
+                                                {% load my_filters %}
+                                                {% for i in avgs|times %}
+                                                    <span class="fa fa-star"></span>
+                                                {% endfor %} 
+                                                </br>
+                                            
+                                            {% comment %} <h2>{{ b.avg_rate|floatformat:0 }}</h2>Average Rating {% endcomment %}
+                                            {% endif %}
+                                            {% endwith %}
+                                <button type="submit" name="Cat_val" value={{ b.id }} class="btn btn-primary ">{{ b.name }}</button>
+                                </form>
+                                {% comment %} <a href="#" class="btn btn-primary ">{{ b.name }}</a> {% endcomment %}
                                 </div>
                             </div>
                         {% endfor %}
+                       
                         {% comment %} <div class="card m-4" style="width: 16rem;">
                             <img class="card-img-top h-75" src="{% static "quickfeed/images/cafe.PNG" %}" alt="home"/>
                             <div class="card-body text-center">
