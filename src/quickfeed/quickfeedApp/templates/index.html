@@ -166,10 +166,9 @@
                                 {% endif %}
                                 <div class="card-body text-center">
                                  <h5 class="card-title"></h5> 
-                                
-                                
+                                                           
                                 {% comment %} <p class="card-text">Category descrSome quick example text to build on the card title and make up the bulk of the card's content.</p> {% endcomment %}
-                                <form action="Top-service" method=POST >
+                                <form action="topService" method=POST >
                                 {% csrf_token %}
                                 {% with  b.avg_rate|floatformat:0|add:0 as avgs %}
                                 

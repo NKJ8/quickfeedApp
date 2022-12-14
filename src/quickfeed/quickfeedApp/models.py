@@ -73,7 +73,7 @@ class Business(models.Model):
     image6 = models.ImageField(null=True,blank=True,upload_to="images/")
 
     def __str__(self) -> str:
-        #return f"{self.first_name} {self.last_name}"
+         #return f"{self.first_name} {self.last_name}"
         return self.name
     
     @property

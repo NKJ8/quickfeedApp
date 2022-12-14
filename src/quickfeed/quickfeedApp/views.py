@@ -545,3 +545,21 @@ def details(request):
     else:
         return render(request,'search.html')
     
+
+def topService(request):
+    if request.method == 'POST':
+        catButtonVal = request.POST.get('Cat_val')
+        print(catButtonVal)
+        review = Reviews.objects.filter(business_id=catButtonVal)
+        business = Business.objects.filter(id=catButtonVal)
+        
+        form = reviewForm(request.POST or None)
+        if not business:
+                return render(request,'search_not_found.html',{'business':business})
+        else:
+                return render(request,'topService.html',{'business':business,"form": form})
+    else:
+            return render(request,'topService.html')
+    
+    
+    
