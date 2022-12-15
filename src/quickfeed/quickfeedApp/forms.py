@@ -201,6 +201,16 @@ class reviewForm(forms.Form):
     review = forms.CharField(label='Review', required=False, widget=forms.Textarea(attrs={'style': 'height:100px','class': 'form-control form-control-lg','required' :'True'}))
     
     rate = forms.CharField(label='Select your rating', required=False,  widget=forms.Select(choices=review_star))
+
+    from django import forms
+
+# Create your forms here.
+
+class ContactForm(forms.Form):
+	first_name = forms.CharField(max_length = 50, required=True, error_messages={'required': "First name is required"}, widget=forms.TextInput(attrs={'class': 'form-control'}))
+	last_name = forms.CharField(max_length = 50, required=True, error_messages={'required': "Last name is required"}, widget=forms.TextInput(attrs={'class': 'form-control'}))
+	email_address = forms.EmailField(max_length = 150, required=True, error_messages={'required': "Email is required"}, widget=forms.TextInput(attrs={'class': 'form-control'}))
+	message = forms.CharField( max_length = 2000, required=True, error_messages={'required': "Message name is required"}, widget=forms.Textarea(attrs={'class': 'form-control'}))
     
     
 

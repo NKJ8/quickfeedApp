@@ -24,6 +24,7 @@ urlpatterns = [
     path('forgot-password', views.forgot_password, name='forgot-password-page'),
     path('profile',views.profile, name='profile-page'),
     path('topService',views.topService, name='topService'),
+    path("contact", views.contact, name="contact"),
     # path('thank-you', views.)
     # re_path(r'^login/$', views.login,  name='login-page'),
     #re_path(r'^logout/$', views.logout, name='logout'),

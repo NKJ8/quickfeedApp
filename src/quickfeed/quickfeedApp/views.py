@@ -14,6 +14,9 @@ from django.db.models import Avg
 import operator
 
 from django.db import connection
+from .forms import ContactForm
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 
 
 # Create your views here.
@@ -559,6 +562,35 @@ def topService(request):
                 return render(request,'topService.html',{'business':business,"form": form})
     else:
             return render(request,'topService.html')
+
+def contact(request):
+        message = ""
+        if request.method == 'POST':
+            try:
+                form = ContactForm(request.POST)
+                if form.is_valid():
+                    subject="Customer Support Service"
+                    body = {
+                        'first_name': f"Sender's first name: {form.cleaned_data['first_name']}", 
+                        'last_name': f"Sender's last name: {form.cleaned_data['last_name']}", 
+                        'email': f"Sender's email address: {form.cleaned_data['email_address']}", 
+                        'message': f"Message: {form.cleaned_data['message']}", 
+                    }
+                    message = "\n".join(body.values())
+                    email_from = settings.EMAIL_HOST_USER
+                    recipient_list = [form.cleaned_data['email_address']]
+                    send_mail( subject, message, email_from, ["customer.support@yopmail.com"] )
+
+                    send_mail( "Your complaint has been received", "Thank you for contacting us, we have received your compaint and we are working on it. We will reply as soon as possible", email_from, recipient_list )
+
+                    message = "Email has been sent successfully"
+
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return render(request, "index.html", {"message": message})
+      
+        form = ContactForm()
+        return render(request, "contact.html", {'form':form })
     
     
     

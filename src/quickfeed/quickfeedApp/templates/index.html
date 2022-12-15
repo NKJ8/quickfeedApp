@@ -19,6 +19,11 @@
 <section class="hero">
         <div class="px-4 py-5 my-5 text-center">
             {% comment %} <img class="d-block mx-auto mb-4" src="{% static  %}" alt="" width="72" height="57"> {% endcomment %}
+            {% if message != None and message != ""%}
+                <div class="alert alert-success mt-4 text-center" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}  
             <h1 class="display-5 fw-bold text-primary">QuickFeed</h1>
             
             <div class="col-lg-6 mx-auto">
