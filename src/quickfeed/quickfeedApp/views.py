@@ -121,8 +121,7 @@ def signup(request):
 def signupbusiness(request):
     if request.method == 'POST':
         form = SignUpFormBusiness(request.POST,request.FILES)
-
-        if(form.is_valid() and (form.cleaned_data['password'] == form.cleaned_data['cnf_password'])):
+        if(form.is_valid()) and (form.cleaned_data['password'] == form.cleaned_data['cnf_password']):
             if(form.is_valid() and not(Business.objects.filter(username = form.cleaned_data['username']).exists())):
                 if(form.is_valid() and ((len(form.cleaned_data['password']) > 12) or re.search(" [^a-zA-Z0-9]",form.cleaned_data['password']) or re.search(" [a-zA-Z]",form.cleaned_data['password']) or re.search(" [0-9]",form.cleaned_data['password']))):
                     business = Business(
@@ -436,7 +435,7 @@ def search(request):
             elif( i == 'plumber'):
                 business = Business.objects.filter(category_id=i)
                 break
-            elif( i == 'mover'):
+            elif( i == 'movers') or ( i == 'mover') :
                 business = Business.objects.filter(category_id=i)
                 break
             elif( i == 'cleaner'):

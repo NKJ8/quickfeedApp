@@ -59,6 +59,8 @@
                                     <p >{{ b.description }}.</p>
                                     <p ><strong>Phone</strong>: {{ b.phone }}</p>
                                     <p class="vote"><strong>Address: </strong> {{ b.address }}, {{ b.city }}, {{ b.state }}</p>
+                                    <p ><strong>Price</strong>: {{ b.price }}</p>
+                                    <p ><strong>Open Hours</strong>: {{ b.time }}</p>
                                     {% comment %} <h5 class="sizes">sizes:
                                         <span class="size" data-toggle="tooltip" title="small">s</span>
                                         <span class="size" data-toggle="tooltip" title="medium">m</span>
@@ -122,8 +124,13 @@
                                           <tr>
                                             
                                             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">{{ item.review }}</td>
-                                            <td>{{ item.ratings }}</td>
-                                            <td>{{ item.date }}</td>
+                                            <td>
+                                                {% load my_filters %}
+                                                {% for i in item.ratings|times %}
+                                            <span class="fa fa-star"></span>
+                                            {% endfor %} 
+                                            </td>
+                                            <td>{{ item.date|date:"M d, Y"  }}</td>
                                             <td>{{ item.user_id.name }}</td>
                                           </tr>
                                           {% endfor %}
